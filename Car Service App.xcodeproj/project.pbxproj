@@ -7,9 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		46007B9F24CED7B000A02F3C /* CSATextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46007B9E24CED7B000A02F3C /* CSATextFieldView.swift */; };
+		46007BA124CEE47E00A02F3C /* CSATextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46007BA024CEE47E00A02F3C /* CSATextField.swift */; };
+		46007BA524CEF16D00A02F3C /* CSATextFieldTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46007BA424CEF16D00A02F3C /* CSATextFieldTitleLabel.swift */; };
+		46007BAE24CEF57900A02F3C /* CSAAuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46007BAD24CEF57900A02F3C /* CSAAuthButton.swift */; };
+		46007BB024CEF82100A02F3C /* CSATextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46007BAF24CEF82100A02F3C /* CSATextButton.swift */; };
 		4653BBFB24CEC5AF009C2F6A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4653BBFA24CEC5AF009C2F6A /* AppDelegate.swift */; };
 		4653BBFD24CEC5AF009C2F6A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4653BBFC24CEC5AF009C2F6A /* SceneDelegate.swift */; };
-		4653BBFF24CEC5AF009C2F6A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4653BBFE24CEC5AF009C2F6A /* ViewController.swift */; };
 		4653BC0424CEC5B2009C2F6A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4653BC0324CEC5B2009C2F6A /* Assets.xcassets */; };
 		4653BC0724CEC5B2009C2F6A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4653BC0524CEC5B2009C2F6A /* LaunchScreen.storyboard */; };
 		4653BC1224CEC5B2009C2F6A /* Car_Service_AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4653BC1124CEC5B2009C2F6A /* Car_Service_AppTests.swift */; };
@@ -28,10 +32,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		46007B9E24CED7B000A02F3C /* CSATextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSATextFieldView.swift; sourceTree = "<group>"; };
+		46007BA024CEE47E00A02F3C /* CSATextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSATextField.swift; sourceTree = "<group>"; };
+		46007BA424CEF16D00A02F3C /* CSATextFieldTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSATextFieldTitleLabel.swift; sourceTree = "<group>"; };
+		46007BAD24CEF57900A02F3C /* CSAAuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSAAuthButton.swift; sourceTree = "<group>"; };
+		46007BAF24CEF82100A02F3C /* CSATextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSATextButton.swift; sourceTree = "<group>"; };
 		4653BBF724CEC5AF009C2F6A /* Car Service App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Car Service App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4653BBFA24CEC5AF009C2F6A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4653BBFC24CEC5AF009C2F6A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		4653BBFE24CEC5AF009C2F6A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4653BC0324CEC5B2009C2F6A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4653BC0624CEC5B2009C2F6A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4653BC0824CEC5B2009C2F6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -60,6 +68,70 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		46007BA624CEF4F100A02F3C /* TextFields */ = {
+			isa = PBXGroup;
+			children = (
+				46007BA024CEE47E00A02F3C /* CSATextField.swift */,
+			);
+			path = TextFields;
+			sourceTree = "<group>";
+		};
+		46007BA724CEF4FD00A02F3C /* Labels */ = {
+			isa = PBXGroup;
+			children = (
+				46007BA424CEF16D00A02F3C /* CSATextFieldTitleLabel.swift */,
+			);
+			path = Labels;
+			sourceTree = "<group>";
+		};
+		46007BA824CEF50700A02F3C /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				4653BC1E24CEC9D1009C2F6A /* LoginVC.swift */,
+				4653BC2024CEC9E0009C2F6A /* RegisterVC.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		46007BA924CEF51800A02F3C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				46007B9E24CED7B000A02F3C /* CSATextFieldView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		46007BAA24CEF52100A02F3C /* Cutom Views */ = {
+			isa = PBXGroup;
+			children = (
+				46007BAC24CEF55400A02F3C /* Buttons */,
+				46007BA924CEF51800A02F3C /* Views */,
+				46007BA624CEF4F100A02F3C /* TextFields */,
+				46007BA724CEF4FD00A02F3C /* Labels */,
+			);
+			path = "Cutom Views";
+			sourceTree = "<group>";
+		};
+		46007BAB24CEF52A00A02F3C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4653BBFA24CEC5AF009C2F6A /* AppDelegate.swift */,
+				4653BBFC24CEC5AF009C2F6A /* SceneDelegate.swift */,
+				4653BC0324CEC5B2009C2F6A /* Assets.xcassets */,
+				4653BC0524CEC5B2009C2F6A /* LaunchScreen.storyboard */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		46007BAC24CEF55400A02F3C /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				46007BAD24CEF57900A02F3C /* CSAAuthButton.swift */,
+				46007BAF24CEF82100A02F3C /* CSATextButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
 		4653BBEE24CEC5AF009C2F6A = {
 			isa = PBXGroup;
 			children = (
@@ -81,14 +153,10 @@
 		4653BBF924CEC5AF009C2F6A /* Car Service App */ = {
 			isa = PBXGroup;
 			children = (
-				4653BBFA24CEC5AF009C2F6A /* AppDelegate.swift */,
-				4653BBFC24CEC5AF009C2F6A /* SceneDelegate.swift */,
-				4653BBFE24CEC5AF009C2F6A /* ViewController.swift */,
-				4653BC0324CEC5B2009C2F6A /* Assets.xcassets */,
-				4653BC0524CEC5B2009C2F6A /* LaunchScreen.storyboard */,
 				4653BC0824CEC5B2009C2F6A /* Info.plist */,
-				4653BC1E24CEC9D1009C2F6A /* LoginVC.swift */,
-				4653BC2024CEC9E0009C2F6A /* RegisterVC.swift */,
+				46007BAB24CEF52A00A02F3C /* Supporting Files */,
+				46007BAA24CEF52100A02F3C /* Cutom Views */,
+				46007BA824CEF50700A02F3C /* Screens */,
 			);
 			path = "Car Service App";
 			sourceTree = "<group>";
@@ -202,11 +270,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4653BBFF24CEC5AF009C2F6A /* ViewController.swift in Sources */,
 				4653BBFB24CEC5AF009C2F6A /* AppDelegate.swift in Sources */,
+				46007BA124CEE47E00A02F3C /* CSATextField.swift in Sources */,
 				4653BC2124CEC9E0009C2F6A /* RegisterVC.swift in Sources */,
+				46007BAE24CEF57900A02F3C /* CSAAuthButton.swift in Sources */,
+				46007BB024CEF82100A02F3C /* CSATextButton.swift in Sources */,
 				4653BBFD24CEC5AF009C2F6A /* SceneDelegate.swift in Sources */,
 				4653BC1F24CEC9D1009C2F6A /* LoginVC.swift in Sources */,
+				46007BA524CEF16D00A02F3C /* CSATextFieldTitleLabel.swift in Sources */,
+				46007B9F24CED7B000A02F3C /* CSATextFieldView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
