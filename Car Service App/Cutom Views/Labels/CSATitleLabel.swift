@@ -1,5 +1,5 @@
 //
-//  CSAAuthButton.swift
+//  CSATitleLabel.swift
 //  Car Service App
 //
 //  Created by Murat Baykor on 27.07.2020.
@@ -8,8 +8,8 @@
 
 import UIKit
 
-class CSAAuthButton: UIButton {
-    
+class CSATitleLabel: UILabel {
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -19,19 +19,13 @@ class CSAAuthButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    convenience init(title: String) {
-        self.init(frame: .zero)
-        self.setTitle(title, for: .normal)
+    private func configure() {
+        translatesAutoresizingMaskIntoConstraints = false
+        
+        textColor = Colors.softBlue
+        textAlignment = .left
+        
+        font = UIFont.systemFont(ofSize: 28, weight: .semibold )
     }
     
-    func configure() {
-        translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = Colors.softBlue
-        
-        layer.cornerRadius  = 5
-        titleLabel?.font    = UIFont.preferredFont(forTextStyle: .headline)
-        setTitleColor(.white, for: .normal)
-        
-        
-    }
 }

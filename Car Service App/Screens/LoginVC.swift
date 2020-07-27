@@ -18,13 +18,20 @@ class LoginVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureView()
         configureLogoImageView()
         configureEmailTextFieldView()
         configurePasswordTextFieldView()
         configureLoginButton()
         configureRegisterButton()
-        view.backgroundColor = UIColor(red: 0.09, green: 0.11, blue: 0.38, alpha: 1.00)
+        
+    }
+    
+    func configureView() {
         navigationController?.setNavigationBarHidden(true, animated: true)
+        view.backgroundColor = Colors.darkBlue
+        view.isUserInteractionEnabled = true
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleViewTap)))
     }
     
     
@@ -47,6 +54,8 @@ class LoginVC: UIViewController {
         view.addSubview(emailTextFieldView)
         
         emailTextFieldView.set(textFieldType: .email)
+        emailTextFieldView.textField.delegate = self
+        addTapGesture(view: emailTextFieldView)
         
         NSLayoutConstraint.activate([
             emailTextFieldView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 25),
@@ -61,6 +70,8 @@ class LoginVC: UIViewController {
         view.addSubview(passwordTextFieldView)
         
         passwordTextFieldView.set(textFieldType: .password)
+        passwordTextFieldView.textField.delegate = self
+        addTapGesture(view: passwordTextFieldView)
         
         NSLayoutConstraint.activate([
             passwordTextFieldView.topAnchor.constraint(equalTo: emailTextFieldView.bottomAnchor, constant: 25),
@@ -74,7 +85,7 @@ class LoginVC: UIViewController {
     func configureLoginButton() {
         view.addSubview(loginButton)
         
-         loginButton.addTarget(self, action: #selector(showMain), for: .touchUpInside)
+        loginButton.addTarget(self, action: #selector(showMain), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
             loginButton.topAnchor.constraint(equalTo: passwordTextFieldView.bottomAnchor, constant: 60),
@@ -102,7 +113,37 @@ class LoginVC: UIViewController {
     }
     
     @objc func showRegister(){
-        print("Register")
+        let registerVC = RegisterVC()
+        navigationController?.pushViewController(registerVC, animated: true)
     }
     
+    func addTapGesture(view: CSATextFieldView) {
+        view.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
+        view.addGestureRecognizer(tap)
+    }
+    
+    
+    @objc func handleTap(sender: UIGestureRecognizer) {
+        if let view = sender.view as? CSATextFieldView{
+            view.textField.becomeFirstResponder()
+        }
+    }
+    
+    @objc func handleViewTap() {
+        view.endEditing(true)
+    }
+    
+}
+
+extension LoginVC: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == emailTextFieldView.textField {
+            textField.resignFirstResponder()
+            passwordTextFieldView.textField.becomeFirstResponder()
+        } else if textField == passwordTextFieldView.textField {
+            textField.resignFirstResponder()
+        }
+        return true
+    }
 }

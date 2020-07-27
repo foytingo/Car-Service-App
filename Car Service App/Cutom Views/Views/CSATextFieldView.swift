@@ -9,7 +9,7 @@
 import UIKit
 
 enum TextFieldType {
-    case email, password, normal
+    case email, password, name
 }
 
 class CSATextFieldView: UIView {
@@ -17,7 +17,7 @@ class CSATextFieldView: UIView {
     let textFieldTitle = CSATextFieldTitleLabel()
     let textField = CSATextField()
     let lineView = UIView()
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         translatesAutoresizingMaskIntoConstraints = false
@@ -70,12 +70,16 @@ class CSATextFieldView: UIView {
         switch textFieldType {
         case .email:
             textFieldTitle.text = "Email"
+            textField.textContentType = .emailAddress
             textField.keyboardType = .emailAddress
         case .password:
             textFieldTitle.text = "Password"
-            textField.keyboardType = .alphabet
+            textField.keyboardType = .default
+            textField.textContentType = .password
             textField.isSecureTextEntry = true
-        case .normal:
+        case .name:
+            textFieldTitle.text = "Name"
+            textField.textContentType = .name
             textField.keyboardType = .default
         }
         

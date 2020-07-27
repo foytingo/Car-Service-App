@@ -12,6 +12,8 @@
 		46007BA524CEF16D00A02F3C /* CSATextFieldTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46007BA424CEF16D00A02F3C /* CSATextFieldTitleLabel.swift */; };
 		46007BAE24CEF57900A02F3C /* CSAAuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46007BAD24CEF57900A02F3C /* CSAAuthButton.swift */; };
 		46007BB024CEF82100A02F3C /* CSATextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46007BAF24CEF82100A02F3C /* CSATextButton.swift */; };
+		46007BB224CEFD6A00A02F3C /* CSATitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46007BB124CEFD6A00A02F3C /* CSATitleLabel.swift */; };
+		46007BB424CEFDF600A02F3C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46007BB324CEFDF600A02F3C /* Constants.swift */; };
 		4653BBFB24CEC5AF009C2F6A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4653BBFA24CEC5AF009C2F6A /* AppDelegate.swift */; };
 		4653BBFD24CEC5AF009C2F6A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4653BBFC24CEC5AF009C2F6A /* SceneDelegate.swift */; };
 		4653BC0424CEC5B2009C2F6A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4653BC0324CEC5B2009C2F6A /* Assets.xcassets */; };
@@ -37,6 +39,8 @@
 		46007BA424CEF16D00A02F3C /* CSATextFieldTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSATextFieldTitleLabel.swift; sourceTree = "<group>"; };
 		46007BAD24CEF57900A02F3C /* CSAAuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSAAuthButton.swift; sourceTree = "<group>"; };
 		46007BAF24CEF82100A02F3C /* CSATextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSATextButton.swift; sourceTree = "<group>"; };
+		46007BB124CEFD6A00A02F3C /* CSATitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSATitleLabel.swift; sourceTree = "<group>"; };
+		46007BB324CEFDF600A02F3C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4653BBF724CEC5AF009C2F6A /* Car Service App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Car Service App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4653BBFA24CEC5AF009C2F6A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4653BBFC24CEC5AF009C2F6A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				46007BA424CEF16D00A02F3C /* CSATextFieldTitleLabel.swift */,
+				46007BB124CEFD6A00A02F3C /* CSATitleLabel.swift */,
 			);
 			path = Labels;
 			sourceTree = "<group>";
@@ -153,6 +158,7 @@
 		4653BBF924CEC5AF009C2F6A /* Car Service App */ = {
 			isa = PBXGroup;
 			children = (
+				46007BB324CEFDF600A02F3C /* Constants.swift */,
 				4653BC0824CEC5B2009C2F6A /* Info.plist */,
 				46007BAB24CEF52A00A02F3C /* Supporting Files */,
 				46007BAA24CEF52100A02F3C /* Cutom Views */,
@@ -271,10 +277,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				4653BBFB24CEC5AF009C2F6A /* AppDelegate.swift in Sources */,
+				46007BB424CEFDF600A02F3C /* Constants.swift in Sources */,
 				46007BA124CEE47E00A02F3C /* CSATextField.swift in Sources */,
 				4653BC2124CEC9E0009C2F6A /* RegisterVC.swift in Sources */,
 				46007BAE24CEF57900A02F3C /* CSAAuthButton.swift in Sources */,
 				46007BB024CEF82100A02F3C /* CSATextButton.swift in Sources */,
+				46007BB224CEFD6A00A02F3C /* CSATitleLabel.swift in Sources */,
 				4653BBFD24CEC5AF009C2F6A /* SceneDelegate.swift in Sources */,
 				4653BC1F24CEC9D1009C2F6A /* LoginVC.swift in Sources */,
 				46007BA524CEF16D00A02F3C /* CSATextFieldTitleLabel.swift in Sources */,
@@ -433,7 +441,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3FP28BF586;
 				INFOPLIST_FILE = "Car Service App/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -452,7 +460,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3FP28BF586;
 				INFOPLIST_FILE = "Car Service App/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

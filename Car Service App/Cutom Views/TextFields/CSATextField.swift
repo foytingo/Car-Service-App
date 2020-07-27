@@ -27,7 +27,8 @@ class CSATextField: UITextField {
         tintColor = .white
         autocapitalizationType = .none
         isSecureTextEntry = false
-        
+        autocorrectionType = .no
+        clearButtonMode = .whileEditing
     }
 }
 

@@ -30,7 +30,7 @@ class CSATextButton: UIButton {
 
         titleLabel?.font    = UIFont.preferredFont(forTextStyle: .subheadline)
         
-        setTitleColor(UIColor(red: 0.15, green: 0.74, blue: 0.84, alpha: 1.00), for: .normal)
+        setTitleColor(Colors.softBlue, for: .normal)
         
         
     }
