@@ -19,9 +19,10 @@ class CSATextButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    convenience init(title: String) {
+    convenience init(title: String, color: UIColor) {
         self.init(frame: .zero)
         self.setTitle(title, for: .normal)
+        setTitleColor(color, for: .normal)
     }
     
     func configure() {

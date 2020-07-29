@@ -14,7 +14,7 @@ class LoginVC: UIViewController {
     let emailTextFieldView = CSATextFieldView()
     let passwordTextFieldView = CSATextFieldView()
     let loginButton = CSAAuthButton(title: "Login")
-    let registerButton = CSATextButton(title: "Don't have a account? Sign up!")
+    let registerButton = CSATextButton(title: "Don't have a account? Sign up!", color: Colors.softBlue)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,7 +61,7 @@ class LoginVC: UIViewController {
             emailTextFieldView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 25),
             emailTextFieldView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             emailTextFieldView.heightAnchor.constraint(equalToConstant: 75),
-            emailTextFieldView.widthAnchor.constraint(equalToConstant: 275)
+            emailTextFieldView.widthAnchor.constraint(equalToConstant: 325)
         ])
     }
     
@@ -69,15 +69,16 @@ class LoginVC: UIViewController {
     func configurePasswordTextFieldView() {
         view.addSubview(passwordTextFieldView)
         
-        passwordTextFieldView.set(textFieldType: .password)
+        passwordTextFieldView.set(textFieldType: .password, forgotPasswordOn: true)
         passwordTextFieldView.textField.delegate = self
+        passwordTextFieldView.delegate = self
         addTapGesture(view: passwordTextFieldView)
-        
+
         NSLayoutConstraint.activate([
             passwordTextFieldView.topAnchor.constraint(equalTo: emailTextFieldView.bottomAnchor, constant: 25),
             passwordTextFieldView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            passwordTextFieldView.heightAnchor.constraint(equalToConstant: 75),
-            passwordTextFieldView.widthAnchor.constraint(equalToConstant: 275)
+            passwordTextFieldView.heightAnchor.constraint(equalToConstant: 105),
+            passwordTextFieldView.widthAnchor.constraint(equalToConstant: 325)
         ])
     }
     
@@ -104,12 +105,13 @@ class LoginVC: UIViewController {
             registerButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30),
             registerButton.leadingAnchor.constraint(equalTo: passwordTextFieldView.leadingAnchor, constant: 30),
             registerButton.trailingAnchor.constraint(equalTo: passwordTextFieldView.trailingAnchor, constant: -30),
-            registerButton.heightAnchor.constraint(equalToConstant: 30)
+            registerButton.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
     
     @objc func showMain(){
         print("Login")
+        
     }
     
     @objc func showRegister(){
@@ -132,6 +134,7 @@ class LoginVC: UIViewController {
     
     @objc func handleViewTap() {
         view.endEditing(true)
+        
     }
     
 }
@@ -146,4 +149,14 @@ extension LoginVC: UITextFieldDelegate {
         }
         return true
     }
+}
+
+extension LoginVC: CSATextFieldViewDelegate {
+    func handleForgotPasswordButton() {
+        print("asdfasdfasdf")
+    }
+    
+   
+    
+    
 }

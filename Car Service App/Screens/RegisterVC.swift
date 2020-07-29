@@ -15,7 +15,7 @@ class RegisterVC: UIViewController {
     let emailTextFieldView = CSATextFieldView()
     let passwordTextFieldView = CSATextFieldView()
     let registerButton = CSAAuthButton(title: "Sign up")
-    let loginButton = CSATextButton(title: "Do you have a account? Login!")
+    let loginButton = CSATextButton(title: "Do you have a account? Login!", color: Colors.softBlue)
     
     
     
@@ -60,7 +60,7 @@ class RegisterVC: UIViewController {
             nameTextFieldView.topAnchor.constraint(equalTo: view.topAnchor, constant: 200),
             nameTextFieldView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             nameTextFieldView.heightAnchor.constraint(equalToConstant: 75),
-            nameTextFieldView.widthAnchor.constraint(equalToConstant: 275)
+            nameTextFieldView.widthAnchor.constraint(equalToConstant: 325)
         ])
     }
     
@@ -74,7 +74,7 @@ class RegisterVC: UIViewController {
             emailTextFieldView.topAnchor.constraint(equalTo: nameTextFieldView.bottomAnchor, constant: 25),
             emailTextFieldView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             emailTextFieldView.heightAnchor.constraint(equalToConstant: 75),
-            emailTextFieldView.widthAnchor.constraint(equalToConstant: 275)
+            emailTextFieldView.widthAnchor.constraint(equalToConstant: 325)
         ])
     }
     
@@ -88,7 +88,7 @@ class RegisterVC: UIViewController {
             passwordTextFieldView.topAnchor.constraint(equalTo: emailTextFieldView.bottomAnchor, constant: 25),
             passwordTextFieldView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             passwordTextFieldView.heightAnchor.constraint(equalToConstant: 75),
-            passwordTextFieldView.widthAnchor.constraint(equalToConstant: 275)
+            passwordTextFieldView.widthAnchor.constraint(equalToConstant: 325)
         ])
     }
     
@@ -116,7 +116,7 @@ class RegisterVC: UIViewController {
             loginButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30),
             loginButton.leadingAnchor.constraint(equalTo: passwordTextFieldView.leadingAnchor, constant: 30),
             loginButton.trailingAnchor.constraint(equalTo: passwordTextFieldView.trailingAnchor, constant: -30),
-            loginButton.heightAnchor.constraint(equalToConstant: 30)
+            loginButton.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
     
