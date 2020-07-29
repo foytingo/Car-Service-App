@@ -32,15 +32,15 @@ class ForgotPasswordVC: UIViewController {
     }
     
     func configureTitleLabel() {
-           view.addSubview(titleLabel)
-           
-           titleLabel.text = "Reset password"
-           
-           NSLayoutConstraint.activate([
-               titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 125),
-               titleLabel.leadingAnchor.constraint(equalTo: emailTextFieldView.leadingAnchor, constant: 10)
-           ])
-       }
+        view.addSubview(titleLabel)
+        
+        titleLabel.text = "Reset password"
+        
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 125),
+            titleLabel.leadingAnchor.constraint(equalTo: emailTextFieldView.leadingAnchor, constant: 10)
+        ])
+    }
     
     func configureEmailTextFieldView() {
         view.addSubview(emailTextFieldView)
@@ -75,7 +75,7 @@ class ForgotPasswordVC: UIViewController {
         loginButton.addTarget(self, action: #selector(showLogin), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
-            loginButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
+            loginButton.topAnchor.constraint(equalTo: resetPasswordButton.bottomAnchor, constant: 20),
             loginButton.leadingAnchor.constraint(equalTo: emailTextFieldView.leadingAnchor, constant: 30),
             loginButton.trailingAnchor.constraint(equalTo: emailTextFieldView.trailingAnchor, constant: -30),
             loginButton.heightAnchor.constraint(equalToConstant: 40)
@@ -87,12 +87,33 @@ class ForgotPasswordVC: UIViewController {
     }
     
     @objc func resetPassword(){
-           print("show alert and back")
-       }
+        view.endEditing(true)
+        guard let email = emailTextFieldView.textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
+        
+        emailTextFieldView.checkIsEmpty()
+        
+        if email == "" {
+            print("fill empty field")
+            
+        } else {
+            
+            AuthManager.forgotPassword(withEmail: email) { [weak self] result in
+                guard let self = self else { return }
+                switch result {
+                case .success(let message):
+                    print(message)
+                    self.navigationController?.popToRootViewController(animated: true)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        }
+        
+    }
     
     @objc func handleViewTap() {
-           view.endEditing(true)
-       }
+        view.endEditing(true)
+    }
     
     func addTapGesture(view: CSATextFieldView) {
         view.isUserInteractionEnabled = true
@@ -113,6 +134,19 @@ extension ForgotPasswordVC: UITextFieldDelegate {
             textField.resignFirstResponder()
         }
         
+        return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == emailTextFieldView.textField {
+            emailTextFieldView.checkIsEmpty()
+        }
+    }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if textField == emailTextFieldView.textField {
+            emailTextFieldView.setNormalColor()
+        }
         return true
     }
 }

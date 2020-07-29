@@ -120,24 +120,35 @@ class RegisterVC: UIViewController {
         ])
     }
     
+    
     @objc func showMain(){
         view.endEditing(true)
-        guard let name = nameTextFieldView.textField.text else { return }
-        guard let email = emailTextFieldView.textField.text else { return }
-        guard let password = passwordTextFieldView.textField.text else { return }
+        guard let name = nameTextFieldView.textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
+        guard let email = emailTextFieldView.textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
+        guard let password = passwordTextFieldView.textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
         
-        let user = User(name: name, email: email, password: password)
+        nameTextFieldView.checkIsEmpty()
+        emailTextFieldView.checkIsEmpty()
+        passwordTextFieldView.checkIsEmpty()
         
-        AuthManager.register(with: user) { [weak self] result in
-            guard self != nil else { return }
-            switch result {
-            case .success(let uid):
-                print(uid)
-                
-            case .failure(let error):
-                print(error.localizedDescription)
+        if name == "" || email == "" || password == "" {
+            print("fill empty field")
+        } else {
+            
+            let user = User(name: name, email: email, password: password)
+            
+            AuthManager.register(with: user) { [weak self] result in
+                guard self != nil else { return }
+                switch result {
+                case .success(let uid):
+                    print(uid)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
             }
         }
+        
+        
         
     }
     
@@ -178,4 +189,27 @@ extension RegisterVC: UITextFieldDelegate {
         }
         return true
     }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == nameTextFieldView.textField {
+            nameTextFieldView.checkIsEmpty()
+        } else if textField == emailTextFieldView.textField {
+            emailTextFieldView.checkIsEmpty()
+        } else if textField == passwordTextFieldView.textField {
+            passwordTextFieldView.checkIsEmpty()
+        }
+    }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if textField == nameTextFieldView.textField {
+            nameTextFieldView.setNormalColor()
+        } else if textField == emailTextFieldView.textField {
+            emailTextFieldView.setNormalColor()
+        } else if textField == passwordTextFieldView.textField {
+            passwordTextFieldView.setNormalColor()
+        }
+        return true
+    }
+ 
+    
 }

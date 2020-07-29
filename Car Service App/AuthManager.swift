@@ -28,11 +28,29 @@ struct AuthManager {
                     completed(.failure(error))
                 }
             }
-    
+            
             guard let user = result?.user else { return }
+            
+            user.sendEmailVerification { error in
+                if let error = error {
+                    completed(.failure(error))
+                }
+            }
             completed(.success(user.uid))
         }
     }
+    
+    
+    static func forgotPassword(withEmail email: String, completed: @escaping(Result<String, Error>) -> Void) {
+        
+        Auth.auth().sendPasswordReset(withEmail: email) { error in
+            if let error = error {
+                completed(.failure(error))
+            }
+            completed(.success("Pasword reset email sent."))
+        }
+    }
+    
     
     
     static func login(withemail email: String, password: String, completed: @escaping(Result<String, Error>) -> Void) {

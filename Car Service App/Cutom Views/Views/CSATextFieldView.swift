@@ -22,7 +22,7 @@ class CSATextFieldView: UIView {
     let textField = CSATextField()
     let forgotPasswordButton = CSATextButton(title: "Forgot Password", color: .lightGray)
     let lineView = UIView()
-
+    
     var delegate: CSATextFieldViewDelegate?
     
     override init(frame: CGRect) {
@@ -83,14 +83,33 @@ class CSATextFieldView: UIView {
             forgotPasswordButton.topAnchor.constraint(equalTo: lineView.bottomAnchor, constant: 8),
             forgotPasswordButton.trailingAnchor.constraint(equalTo: lineView.trailingAnchor),
             forgotPasswordButton.heightAnchor.constraint(equalToConstant: 27),
-           // forgotPasswordButton.widthAnchor.constraint(equalToConstant: 100)
+            // forgotPasswordButton.widthAnchor.constraint(equalToConstant: 100)
         ])
     }
     
     @objc func handleForgotPassword() {
         delegate?.handleForgotPasswordButton()
-
+        
     }
+    
+    func checkIsEmpty() {
+        if textField.text == "" {
+            setRedColor()
+        } else {
+            setNormalColor()
+        }
+    }
+    
+    func setRedColor() {
+        textFieldTitle.textColor = .systemRed
+        lineView.backgroundColor = .systemRed
+    }
+    
+    func setNormalColor() {
+        textFieldTitle.textColor = .white
+        lineView.backgroundColor = .white
+    }
+
     
     
     func set(textFieldType: TextFieldType, forgotPasswordOn: Bool = false) {
