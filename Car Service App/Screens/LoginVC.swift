@@ -110,8 +110,21 @@ class LoginVC: UIViewController {
     }
     
     @objc func showMain(){
-        print("Login")
+        view.endEditing(true)
+        guard let email = emailTextFieldView.textField.text else { return }
+        guard let password = passwordTextFieldView.textField.text else { return }
         
+        AuthManager.login(withemail: email, password: password) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let uid):
+                let mainVC = MainVC()
+                mainVC.uid = uid
+                self.navigationController?.pushViewController(mainVC, animated: true)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
     
     @objc func showRegister(){

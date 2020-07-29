@@ -121,7 +121,24 @@ class RegisterVC: UIViewController {
     }
     
     @objc func showMain(){
-        print("show autanticate mail")
+        view.endEditing(true)
+        guard let name = nameTextFieldView.textField.text else { return }
+        guard let email = emailTextFieldView.textField.text else { return }
+        guard let password = passwordTextFieldView.textField.text else { return }
+        
+        let user = User(name: name, email: email, password: password)
+        
+        AuthManager.register(with: user) { [weak self] result in
+            guard self != nil else { return }
+            switch result {
+            case .success(let uid):
+                print(uid)
+                
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        
     }
     
     @objc func showLogin(){
