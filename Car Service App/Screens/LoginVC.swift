@@ -153,7 +153,9 @@ extension LoginVC: UITextFieldDelegate {
 
 extension LoginVC: CSATextFieldViewDelegate {
     func handleForgotPasswordButton() {
-        print("asdfasdfasdf")
+        let forgotPasswordVC = ForgotPasswordVC()
+        forgotPasswordVC.emailTextFieldView.textField.text = emailTextFieldView.textField.text
+        navigationController?.pushViewController(forgotPasswordVC, animated: true)
     }
     
    

@@ -21,6 +21,7 @@
 		4653BC1224CEC5B2009C2F6A /* Car_Service_AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4653BC1124CEC5B2009C2F6A /* Car_Service_AppTests.swift */; };
 		4653BC1F24CEC9D1009C2F6A /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4653BC1E24CEC9D1009C2F6A /* LoginVC.swift */; };
 		4653BC2124CEC9E0009C2F6A /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4653BC2024CEC9E0009C2F6A /* RegisterVC.swift */; };
+		46EE283524D17C9F00836C63 /* ForgotPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EE283424D17C9F00836C63 /* ForgotPasswordVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		4653BC1324CEC5B2009C2F6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4653BC1E24CEC9D1009C2F6A /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		4653BC2024CEC9E0009C2F6A /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
+		46EE283424D17C9F00836C63 /* ForgotPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 			children = (
 				4653BC1E24CEC9D1009C2F6A /* LoginVC.swift */,
 				4653BC2024CEC9E0009C2F6A /* RegisterVC.swift */,
+				46EE283424D17C9F00836C63 /* ForgotPasswordVC.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -278,6 +281,7 @@
 			files = (
 				4653BBFB24CEC5AF009C2F6A /* AppDelegate.swift in Sources */,
 				46007BB424CEFDF600A02F3C /* Constants.swift in Sources */,
+				46EE283524D17C9F00836C63 /* ForgotPasswordVC.swift in Sources */,
 				46007BA124CEE47E00A02F3C /* CSATextField.swift in Sources */,
 				4653BC2124CEC9E0009C2F6A /* RegisterVC.swift in Sources */,
 				46007BAE24CEF57900A02F3C /* CSAAuthButton.swift in Sources */,
