@@ -12,7 +12,7 @@ class ForgotPasswordVC: UIViewController {
     
     let titleLabel = CSATitleLabel()
     let emailTextFieldView = CSATextFieldView()
-    let resetPasswordButton = CSAAuthButton(title: "Reset Password")
+    let resetPasswordButton = CSAAuthButton(title: "Reset password")
     let loginButton = CSATextButton(title: "Do you remember password? Login!", color: Colors.softBlue)
     
     override func viewDidLoad() {
@@ -34,10 +34,10 @@ class ForgotPasswordVC: UIViewController {
     func configureTitleLabel() {
            view.addSubview(titleLabel)
            
-           titleLabel.text = "Reset Password"
+           titleLabel.text = "Reset password"
            
            NSLayoutConstraint.activate([
-               titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 140),
+               titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 125),
                titleLabel.leadingAnchor.constraint(equalTo: emailTextFieldView.leadingAnchor, constant: 10)
            ])
        }
@@ -75,7 +75,7 @@ class ForgotPasswordVC: UIViewController {
         loginButton.addTarget(self, action: #selector(showLogin), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
-            loginButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30),
+            loginButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
             loginButton.leadingAnchor.constraint(equalTo: emailTextFieldView.leadingAnchor, constant: 30),
             loginButton.trailingAnchor.constraint(equalTo: emailTextFieldView.trailingAnchor, constant: -30),
             loginButton.heightAnchor.constraint(equalToConstant: 40)

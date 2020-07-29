@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>56178835496-0gudi296aeosjt8ci2knepj9cqfgshqp.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.56178835496-0gudi296aeosjt8ci2knepj9cqfgshqp</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBZcB9wdKoVVQI-DAj-YB6co2d4hHjFlTw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>56178835496</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.foytingo.Car-Service-App</string>
+	<key>PROJECT_ID</key>
+	<string>car-service-app-204b1</string>
+	<key>STORAGE_BUCKET</key>
+	<string>car-service-app-204b1.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:56178835496:ios:85418b899866e6a6a4751d</string>
+	<key>DATABASE_URL</key>
+	<string>https://car-service-app-204b1.firebaseio.com</string>
+</dict>
+</plist>

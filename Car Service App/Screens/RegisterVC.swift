@@ -44,7 +44,7 @@ class RegisterVC: UIViewController {
         titleLabel.text = "Create account"
         
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 140),
+            titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 125),
             titleLabel.leadingAnchor.constraint(equalTo: nameTextFieldView.leadingAnchor, constant: 10)
         ])
     }
@@ -113,7 +113,7 @@ class RegisterVC: UIViewController {
         loginButton.addTarget(self, action: #selector(showLogin), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
-            loginButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30),
+            loginButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
             loginButton.leadingAnchor.constraint(equalTo: passwordTextFieldView.leadingAnchor, constant: 30),
             loginButton.trailingAnchor.constraint(equalTo: passwordTextFieldView.trailingAnchor, constant: -30),
             loginButton.heightAnchor.constraint(equalToConstant: 40)
