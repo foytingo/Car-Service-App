@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ForgotPasswordVC: UIViewController {
+class ForgotPasswordVC: CSALoadingVC {
     
     let titleLabel = CSATitleLabel()
     let emailTextFieldView = CSATextFieldView()
@@ -92,21 +92,22 @@ class ForgotPasswordVC: UIViewController {
         
         emailTextFieldView.checkIsEmpty()
         
-        if email == "" {
-            print("fill empty field")
-            
-        } else {
-            
+        if email != "" {
+            showLoadingView()
             AuthManager.forgotPassword(withEmail: email) { [weak self] result in
                 guard let self = self else { return }
+                self.dismissLoadingView()
+                
                 switch result {
                 case .success(let message):
-                    print(message)
-                    self.navigationController?.popToRootViewController(animated: true)
+                    self.presentAlertWithOkAction(title: "Password Reset", message: message) { action in
+                        self.navigationController?.popToRootViewController(animated: true)
+                    }
                 case .failure(let error):
-                    print(error.localizedDescription)
+                    self.presentAlertWithOk(title: "Error", message: error.localizedDescription)
                 }
             }
+            
         }
         
     }

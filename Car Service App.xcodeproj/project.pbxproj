@@ -21,9 +21,10 @@
 		4653BC1224CEC5B2009C2F6A /* Car_Service_AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4653BC1124CEC5B2009C2F6A /* Car_Service_AppTests.swift */; };
 		4653BC1F24CEC9D1009C2F6A /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4653BC1E24CEC9D1009C2F6A /* LoginVC.swift */; };
 		4653BC2124CEC9E0009C2F6A /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4653BC2024CEC9E0009C2F6A /* RegisterVC.swift */; };
+		4655EB1424D2BDEE0060DEC7 /* CSALoadingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4655EB1324D2BDEE0060DEC7 /* CSALoadingVC.swift */; };
+		4655EB1624D2C0410060DEC7 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4655EB1524D2C0410060DEC7 /* UIViewController+Ext.swift */; };
 		46645C6224D193180099717A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46645C6124D193180099717A /* User.swift */; };
 		46645C6424D195B20099717A /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46645C6324D195B20099717A /* AuthManager.swift */; };
-		46645C6624D197AA0099717A /* CSAError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46645C6524D197AA0099717A /* CSAError.swift */; };
 		46645C6824D1A4EF0099717A /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46645C6724D1A4EF0099717A /* MainVC.swift */; };
 		46EE283524D17C9F00836C63 /* ForgotPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EE283424D17C9F00836C63 /* ForgotPasswordVC.swift */; };
 		46EE283724D18F6600836C63 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46EE283624D18F6600836C63 /* GoogleService-Info.plist */; };
@@ -63,9 +64,10 @@
 		4653BC1324CEC5B2009C2F6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4653BC1E24CEC9D1009C2F6A /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		4653BC2024CEC9E0009C2F6A /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
+		4655EB1324D2BDEE0060DEC7 /* CSALoadingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSALoadingVC.swift; sourceTree = "<group>"; };
+		4655EB1524D2C0410060DEC7 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		46645C6124D193180099717A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		46645C6324D195B20099717A /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
-		46645C6524D197AA0099717A /* CSAError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSAError.swift; sourceTree = "<group>"; };
 		46645C6724D1A4EF0099717A /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		46EE283424D17C9F00836C63 /* ForgotPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordVC.swift; sourceTree = "<group>"; };
 		46EE283624D18F6600836C63 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 				46007BAC24CEF55400A02F3C /* Buttons */,
 				46007BA924CEF51800A02F3C /* Views */,
 				46007BA624CEF4F100A02F3C /* TextFields */,
+				4655EB1824D2C71E0060DEC7 /* ViewControllers */,
 				46007BA724CEF4FD00A02F3C /* Labels */,
 			);
 			path = "Cutom Views";
@@ -185,14 +188,14 @@
 			isa = PBXGroup;
 			children = (
 				46645C6024D193070099717A /* Models */,
-				46007BB324CEFDF600A02F3C /* Constants.swift */,
+				4655EB1B24D2C75E0060DEC7 /* Helpers */,
 				4653BC0824CEC5B2009C2F6A /* Info.plist */,
 				46EE283624D18F6600836C63 /* GoogleService-Info.plist */,
 				46007BAB24CEF52A00A02F3C /* Supporting Files */,
 				46007BAA24CEF52100A02F3C /* Cutom Views */,
 				46007BA824CEF50700A02F3C /* Screens */,
-				46645C6324D195B20099717A /* AuthManager.swift */,
-				46645C6524D197AA0099717A /* CSAError.swift */,
+				4655EB1924D2C7270060DEC7 /* Managers */,
+				4655EB1724D2C70C0060DEC7 /* Extensions */,
 			);
 			path = "Car Service App";
 			sourceTree = "<group>";
@@ -204,6 +207,38 @@
 				4653BC1324CEC5B2009C2F6A /* Info.plist */,
 			);
 			path = "Car Service AppTests";
+			sourceTree = "<group>";
+		};
+		4655EB1724D2C70C0060DEC7 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4655EB1524D2C0410060DEC7 /* UIViewController+Ext.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		4655EB1824D2C71E0060DEC7 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				4655EB1324D2BDEE0060DEC7 /* CSALoadingVC.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		4655EB1924D2C7270060DEC7 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				46645C6324D195B20099717A /* AuthManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		4655EB1B24D2C75E0060DEC7 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				46007BB324CEFDF600A02F3C /* Constants.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		46645C6024D193070099717A /* Models */ = {
@@ -410,8 +445,9 @@
 				46645C6824D1A4EF0099717A /* MainVC.swift in Sources */,
 				46007BA124CEE47E00A02F3C /* CSATextField.swift in Sources */,
 				4653BC2124CEC9E0009C2F6A /* RegisterVC.swift in Sources */,
+				4655EB1624D2C0410060DEC7 /* UIViewController+Ext.swift in Sources */,
+				4655EB1424D2BDEE0060DEC7 /* CSALoadingVC.swift in Sources */,
 				46007BAE24CEF57900A02F3C /* CSAAuthButton.swift in Sources */,
-				46645C6624D197AA0099717A /* CSAError.swift in Sources */,
 				46007BB024CEF82100A02F3C /* CSATextButton.swift in Sources */,
 				46007BB224CEFD6A00A02F3C /* CSATitleLabel.swift in Sources */,
 				4653BBFD24CEC5AF009C2F6A /* SceneDelegate.swift in Sources */,

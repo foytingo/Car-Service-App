@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RegisterVC: UIViewController {
+class RegisterVC: CSALoadingVC {
     
     let titleLabel = CSATitleLabel()
     let nameTextFieldView = CSATextFieldView()
@@ -131,25 +131,27 @@ class RegisterVC: UIViewController {
         emailTextFieldView.checkIsEmpty()
         passwordTextFieldView.checkIsEmpty()
         
-        if name == "" || email == "" || password == "" {
-            print("fill empty field")
-        } else {
+        if name != "" && email != "" && password != "" {
             
             let user = User(name: name, email: email, password: password)
-            
+            showLoadingView()
             AuthManager.register(with: user) { [weak self] result in
-                guard self != nil else { return }
+                guard let self = self else { return }
+                self.dismissLoadingView()
                 switch result {
                 case .success(let uid):
-                    print(uid)
+                    self.presentMainVC(with: uid)
                 case .failure(let error):
-                    print(error.localizedDescription)
+                    self.presentAlertWithOk(title: "Error", message: error.localizedDescription)
                 }
             }
         }
-        
-        
-        
+    }
+    
+    func presentMainVC(with uid: String) {
+        let mainVC = MainVC()
+        mainVC.uid = uid
+        self.navigationController?.pushViewController(mainVC, animated: true)
     }
     
     @objc func showLogin(){

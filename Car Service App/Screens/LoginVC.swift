@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginVC: UIViewController {
+class LoginVC: CSALoadingVC  {
     
     let logoImageView = UIImageView()
     let emailTextFieldView = CSATextFieldView()
@@ -24,6 +24,9 @@ class LoginVC: UIViewController {
         configurePasswordTextFieldView()
         configureLoginButton()
         configureRegisterButton()
+        
+        emailTextFieldView.textField.text = "muratbaykor@gmail.com"
+        passwordTextFieldView.textField.text = "123456"
         
     }
     
@@ -86,7 +89,7 @@ class LoginVC: UIViewController {
     func configureLoginButton() {
         view.addSubview(loginButton)
         
-        loginButton.addTarget(self, action: #selector(showMain), for: .touchUpInside)
+        loginButton.addTarget(self, action: #selector(handleLoginButton), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
             loginButton.topAnchor.constraint(equalTo: passwordTextFieldView.bottomAnchor, constant: 40),
@@ -109,7 +112,8 @@ class LoginVC: UIViewController {
         ])
     }
     
-    @objc func showMain(){
+    
+    @objc func handleLoginButton(){
         view.endEditing(true)
         guard let email = emailTextFieldView.textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
         guard let password = passwordTextFieldView.textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
@@ -117,24 +121,25 @@ class LoginVC: UIViewController {
         emailTextFieldView.checkIsEmpty()
         passwordTextFieldView.checkIsEmpty()
         
-        if email == "" || password == "" {
-            print("fill empty field")
-            
-        } else {
+        if email != "" && password != "" {
+            showLoadingView()
             AuthManager.login(withemail: email, password: password) { [weak self] result in
                 guard let self = self else { return }
+                self.dismissLoadingView()
                 switch result {
                 case .success(let uid):
-                    let mainVC = MainVC()
-                    mainVC.uid = uid
-                    self.navigationController?.pushViewController(mainVC, animated: true)
+                    self.presentMainVC(with: uid)
                 case .failure(let error):
-                    print(error.localizedDescription)
+                    self.presentAlertWithOk(title: "Error", message: error.localizedDescription)
                 }
             }
         }
-        
-        
+    }
+    
+    func presentMainVC(with uid: String) {
+        let mainVC = MainVC()
+        mainVC.uid = uid
+        self.navigationController?.pushViewController(mainVC, animated: true)
     }
     
     @objc func showRegister(){
