@@ -14,6 +14,11 @@
 		46007BB024CEF82100A02F3C /* CSATextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46007BAF24CEF82100A02F3C /* CSATextButton.swift */; };
 		46007BB224CEFD6A00A02F3C /* CSATitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46007BB124CEFD6A00A02F3C /* CSATitleLabel.swift */; };
 		46007BB424CEFDF600A02F3C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46007BB324CEFDF600A02F3C /* Constants.swift */; };
+		4613AF4024D95EA200DEDEDF /* AddCarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4613AF3F24D95EA200DEDEDF /* AddCarVC.swift */; };
+		4613AF4324D9722B00DEDEDF /* AddCarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4613AF4224D9722B00DEDEDF /* AddCarCell.swift */; };
+		4613AF4624D983FD00DEDEDF /* CarListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4613AF4524D983FD00DEDEDF /* CarListVC.swift */; };
+		4613AF4824D9841200DEDEDF /* ColorListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4613AF4724D9841200DEDEDF /* ColorListVC.swift */; };
+		4613AF4A24D9843D00DEDEDF /* ModelListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4613AF4924D9843D00DEDEDF /* ModelListVC.swift */; };
 		4653BBFB24CEC5AF009C2F6A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4653BBFA24CEC5AF009C2F6A /* AppDelegate.swift */; };
 		4653BBFD24CEC5AF009C2F6A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4653BBFC24CEC5AF009C2F6A /* SceneDelegate.swift */; };
 		4653BC0424CEC5B2009C2F6A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4653BC0324CEC5B2009C2F6A /* Assets.xcassets */; };
@@ -53,6 +58,11 @@
 		46007BAF24CEF82100A02F3C /* CSATextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSATextButton.swift; sourceTree = "<group>"; };
 		46007BB124CEFD6A00A02F3C /* CSATitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSATitleLabel.swift; sourceTree = "<group>"; };
 		46007BB324CEFDF600A02F3C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		4613AF3F24D95EA200DEDEDF /* AddCarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCarVC.swift; sourceTree = "<group>"; };
+		4613AF4224D9722B00DEDEDF /* AddCarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCarCell.swift; sourceTree = "<group>"; };
+		4613AF4524D983FD00DEDEDF /* CarListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarListVC.swift; sourceTree = "<group>"; };
+		4613AF4724D9841200DEDEDF /* ColorListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorListVC.swift; sourceTree = "<group>"; };
+		4613AF4924D9843D00DEDEDF /* ModelListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelListVC.swift; sourceTree = "<group>"; };
 		4653BBF724CEC5AF009C2F6A /* Car Service App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Car Service App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4653BBFA24CEC5AF009C2F6A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4653BBFC24CEC5AF009C2F6A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -120,6 +130,10 @@
 				4653BC2024CEC9E0009C2F6A /* RegisterVC.swift */,
 				46EE283424D17C9F00836C63 /* ForgotPasswordVC.swift */,
 				46645C6724D1A4EF0099717A /* MainVC.swift */,
+				4613AF3F24D95EA200DEDEDF /* AddCarVC.swift */,
+				4613AF4524D983FD00DEDEDF /* CarListVC.swift */,
+				4613AF4724D9841200DEDEDF /* ColorListVC.swift */,
+				4613AF4924D9843D00DEDEDF /* ModelListVC.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -140,6 +154,7 @@
 				46007BA624CEF4F100A02F3C /* TextFields */,
 				4655EB1824D2C71E0060DEC7 /* ViewControllers */,
 				46007BA724CEF4FD00A02F3C /* Labels */,
+				4613AF4424D9837700DEDEDF /* Cells */,
 			);
 			path = "Cutom Views";
 			sourceTree = "<group>";
@@ -162,6 +177,14 @@
 				46007BAF24CEF82100A02F3C /* CSATextButton.swift */,
 			);
 			path = Buttons;
+			sourceTree = "<group>";
+		};
+		4613AF4424D9837700DEDEDF /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				4613AF4224D9722B00DEDEDF /* AddCarCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		4653BBEE24CEC5AF009C2F6A = {
@@ -442,15 +465,20 @@
 				4653BBFB24CEC5AF009C2F6A /* AppDelegate.swift in Sources */,
 				46007BB424CEFDF600A02F3C /* Constants.swift in Sources */,
 				46EE283524D17C9F00836C63 /* ForgotPasswordVC.swift in Sources */,
+				4613AF4324D9722B00DEDEDF /* AddCarCell.swift in Sources */,
+				4613AF4024D95EA200DEDEDF /* AddCarVC.swift in Sources */,
 				46645C6824D1A4EF0099717A /* MainVC.swift in Sources */,
 				46007BA124CEE47E00A02F3C /* CSATextField.swift in Sources */,
+				4613AF4624D983FD00DEDEDF /* CarListVC.swift in Sources */,
 				4653BC2124CEC9E0009C2F6A /* RegisterVC.swift in Sources */,
 				4655EB1624D2C0410060DEC7 /* UIViewController+Ext.swift in Sources */,
 				4655EB1424D2BDEE0060DEC7 /* CSALoadingVC.swift in Sources */,
 				46007BAE24CEF57900A02F3C /* CSAAuthButton.swift in Sources */,
 				46007BB024CEF82100A02F3C /* CSATextButton.swift in Sources */,
 				46007BB224CEFD6A00A02F3C /* CSATitleLabel.swift in Sources */,
+				4613AF4824D9841200DEDEDF /* ColorListVC.swift in Sources */,
 				4653BBFD24CEC5AF009C2F6A /* SceneDelegate.swift in Sources */,
+				4613AF4A24D9843D00DEDEDF /* ModelListVC.swift in Sources */,
 				4653BC1F24CEC9D1009C2F6A /* LoginVC.swift in Sources */,
 				46007BA524CEF16D00A02F3C /* CSATextFieldTitleLabel.swift in Sources */,
 				46007B9F24CED7B000A02F3C /* CSATextFieldView.swift in Sources */,
