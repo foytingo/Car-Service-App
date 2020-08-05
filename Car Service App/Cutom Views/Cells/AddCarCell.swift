@@ -46,7 +46,7 @@ class AddCarCell: UITableViewCell {
         disclosure.image = image
         accessoryView = disclosure
         
-        detailTextLabel?.text = "Select"
+        
         switch cellType {
         case .brand:
             textLabel?.text = "Brand"

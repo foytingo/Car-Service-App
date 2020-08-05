@@ -1,5 +1,5 @@
 //
-//  YearListVC.swift
+//  BrandListVC.swift
 //  Car Service App
 //
 //  Created by Murat Baykor on 5.08.2020.
@@ -8,17 +8,17 @@
 
 import UIKit
 
-protocol SelectColorDelegate: class {
-    func didSelectColor(selectedColor: String)
+protocol SelectBrandDelegate: class {
+    func didSelectBrand(selectedBrand: String)
 }
 
-class ColorListVC: UITableViewController {
+class BrandListVC: UITableViewController {
 
-    weak var selectColorDelegate: SelectColorDelegate?
+    
+    weak var selectBrandDelegate: SelectBrandDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         navigationController?.setNavigationBarHidden(false, animated: true)
         navigationController?.navigationBar.barTintColor = Colors.softBlue
         navigationController?.navigationBar.tintColor = Colors.darkBlue
@@ -26,26 +26,26 @@ class ColorListVC: UITableViewController {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         
         view.backgroundColor = Colors.darkBlue
-        title = "Select Color"
+        title = "Select Car Brand"
         tableView.separatorColor = Colors.softBlue
         tableView.separatorInset = .init(top: 0, left: 10, bottom: 0, right: 10)
         tableView.tableFooterView = UIView()
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "ColorCell")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "CarBrandCell")
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
-    
+
     // MARK: - Table view data source
-    
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Arrays.colors.count
+        return Arrays.carBrands.count
     }
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ColorCell", for: indexPath)
-        cell.textLabel?.text = Arrays.colors[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CarBrandCell", for: indexPath)
+        cell.textLabel?.text = Arrays.carBrands[indexPath.row]
         cell.textLabel?.textColor = .white
         cell.backgroundColor = Colors.darkBlue
         
@@ -53,8 +53,7 @@ class ColorListVC: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectColorDelegate?.didSelectColor(selectedColor: Arrays.colors[indexPath.row])
+        selectBrandDelegate?.didSelectBrand(selectedBrand: Arrays.carBrands[indexPath.row])
         navigationController?.popViewController(animated: true)
-        
     }
 }

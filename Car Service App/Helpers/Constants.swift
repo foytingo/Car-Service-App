@@ -22,5 +22,6 @@ enum Arrays {
     static let seatModels = ["Ibiza", "Alhambra", "Mii", "Leon", "Ateca", "Arona", "Tarraco", "Exeo"]
     static let skodaModels = ["Octavia","Kodiaq", "Karoq","Kamiq","Scala", "Citigo", "Fabia","Superb","Rapid","Yeti" ]
     static let porscheModels = ["911", "Cayenne", "Cayman", "Panamera", "918 Spyder", "Macan", "Taycan"]
+    static let colors = ["Black", "White", "Grey", "Red", "Blue", "Yellow", "Orange", "Green", "Purple", "Pink"]
     
 }

@@ -8,13 +8,13 @@
 
 import UIKit
 
-protocol SelectColorDelegate: class {
-    func didSelectColor(selectedColor: String)
+protocol SelectYearDelegate: class {
+    func didSelectYear(selectedYear: String)
 }
 
-class ColorListVC: UITableViewController {
+class YearListVC: UITableViewController {
 
-    weak var selectColorDelegate: SelectColorDelegate?
+    weak var selectYearDelegate: SelectYearDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,11 +26,11 @@ class ColorListVC: UITableViewController {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         
         view.backgroundColor = Colors.darkBlue
-        title = "Select Color"
+        title = "Select Car Model Year"
         tableView.separatorColor = Colors.softBlue
         tableView.separatorInset = .init(top: 0, left: 10, bottom: 0, right: 10)
         tableView.tableFooterView = UIView()
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "ColorCell")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "ModelYearCell")
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -40,12 +40,12 @@ class ColorListVC: UITableViewController {
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Arrays.colors.count
+        return Arrays.modelYears.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ColorCell", for: indexPath)
-        cell.textLabel?.text = Arrays.colors[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ModelYearCell", for: indexPath)
+        cell.textLabel?.text = Arrays.modelYears[indexPath.row]
         cell.textLabel?.textColor = .white
         cell.backgroundColor = Colors.darkBlue
         
@@ -53,7 +53,7 @@ class ColorListVC: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectColorDelegate?.didSelectColor(selectedColor: Arrays.colors[indexPath.row])
+        selectYearDelegate?.didSelectYear(selectedYear: Arrays.modelYears[indexPath.row])
         navigationController?.popViewController(animated: true)
         
     }
