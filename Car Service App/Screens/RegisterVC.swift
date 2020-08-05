@@ -149,7 +149,7 @@ class RegisterVC: CSALoadingVC {
     }
     
     func presentMainVC(with uid: String) {
-        let mainVC = MainVC()
+        let mainVC = AddCarVC()
         mainVC.uid = uid
         self.navigationController?.pushViewController(mainVC, animated: true)
     }

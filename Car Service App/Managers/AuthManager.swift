@@ -20,10 +20,11 @@ struct AuthManager {
             }
             
             guard let uid = result?.user.uid else { return }
+ 
+            let values = ["uid": uid, "email": userData.email, "name": userData.name, "cars": userData.cars] as [String : Any]
             
-            let values = ["uid": uid, "email": userData.email, "name": userData.name]
-            
-            Firestore.firestore().collection("users").addDocument(data: values) { (error) in
+
+            Firestore.firestore().collection("users").document(uid).setData(values) { (error) in
                 if let error = error {
                     completed(.failure(error))
                 }

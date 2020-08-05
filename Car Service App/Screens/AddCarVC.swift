@@ -21,6 +21,8 @@ class AddCarVC: UIViewController{
     let doneButton = CSAAuthButton(title: "Done")
     let addLaterButton = CSATextButton(title: "Add Later", color: Colors.softBlue)
     
+    var uid: String?
+    
     var brand: String? {
         didSet { brandSelectView.detailLabel.text = brand }
     }
@@ -167,7 +169,25 @@ class AddCarVC: UIViewController{
         guard let plateNumber = plateNumber else { return }
         guard let currentKm = currentKm else { return }
    
-        //save car to firebase
+        let newCar = Car(uid: UUID(), brand: brand, year: year, model: model, color: color, plateNumber: plateNumber, currentKm: currentKm)
+       
+        guard let uid = uid else { return }
+        FirestoreManager.uploadCar(userUid: uid , car: newCar) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let uid):
+                self.presentMainVC(with: uid)
+            case .failure(let error):
+                self.presentAlertWithOk(title: "Error", message: error.localizedDescription)
+            }
+        }
+    }
+    
+    
+    func presentMainVC(with uid: String) {
+        let mainVC = MainVC()
+        mainVC.uid = uid
+        self.navigationController?.pushViewController(mainVC, animated: true)
     }
     
     

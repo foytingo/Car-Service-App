@@ -13,10 +13,12 @@ struct User {
     var name: String
     var email: String
     var password: String
+    var cars: [String] = []
     
     init(name: String, email: String, password: String, uid: String? = nil) {
         self.name = name
         self.email = email
         self.password = password
+  
     }
 }
