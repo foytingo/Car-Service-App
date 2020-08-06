@@ -90,7 +90,7 @@ class MainVC: CSALoadingVC {
     
     func configureHeaderView() {
         view.addSubview(headerView)
-        
+        headerView.mainHeaderViewDelegate = self
         NSLayoutConstraint.activate([
             headerView.topAnchor.constraint(equalTo: headerTitleLabel.bottomAnchor, constant: 10),
             headerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
@@ -138,9 +138,32 @@ extension MainVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CarCell.reuseID, for: indexPath) as! CarCell
         cell.set(car: cars[indexPath.row])
+        cell.carCellDelegate = self
         return cell
     }
     
     
 }
 
+extension MainVC: CarCellDelegate {
+    func didTapActionButton() {
+        //change with textfieldalert
+        presentAlertWithOk(title: "Update KM", message: "km textfield was here")
+    }
+}
+
+extension MainVC: MainHeaderViewDelegate {
+    func didTapSettingsButton() {
+        //change with settings page
+        do{
+            try Auth.auth().signOut()
+             navigationController?.popToRootViewController(animated: true)
+        } catch let error {
+            print("Failed to sing out \(error.localizedDescription)")
+        }
+        
+       
+    }
+    
+    
+}

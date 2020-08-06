@@ -8,17 +8,26 @@
 
 import UIKit
 
-class MainHeaderView: UIView {
+protocol MainHeaderViewDelegate: class {
+    func didTapSettingsButton()
+}
 
+class MainHeaderView: UIView {
+    
     let nameLabel = UILabel()
     let emailLabel = UILabel()
+    let stackView = UIStackView()
     let settingsButton = UIButton(type: .custom)
         
+    weak var mainHeaderViewDelegate: MainHeaderViewDelegate!
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         configureView()
         configureNameLabel()
+        configureEmailLabel()
+        configureStackView()
         configureSettingsButton()
     }
     
@@ -34,18 +43,33 @@ class MainHeaderView: UIView {
     }
     
     private func configureNameLabel() {
-        addSubview(nameLabel)
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        
         nameLabel.textColor = .white
         nameLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+    }
+    
+    private func configureEmailLabel() {
+           emailLabel.translatesAutoresizingMaskIntoConstraints = false
+           emailLabel.textColor = .white
+           emailLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+       }
+    
+    
+    private func configureStackView() {
+        addSubview(stackView)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis          = .vertical
+        stackView.distribution  = .equalSpacing
+        
+        stackView.addArrangedSubview(nameLabel)
+        stackView.addArrangedSubview(emailLabel)
+        
         NSLayoutConstraint.activate([
-            nameLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20)
             
         ])
     }
-    
     
     private func configureSettingsButton() {
         addSubview(settingsButton)
@@ -57,19 +81,30 @@ class MainHeaderView: UIView {
         
         settingsButton.tintColor = .white
         
+        settingsButton.addTarget(self, action: #selector(handleSettingsButton), for: .touchUpInside)
+        
         NSLayoutConstraint.activate([
             settingsButton.centerYAnchor.constraint(equalTo: centerYAnchor),
-            settingsButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
+            settingsButton.centerXAnchor.constraint(equalTo: trailingAnchor, constant: -55)
             
         ])
+    }
+    
+    
+    
+    @objc func handleSettingsButton() {
+        mainHeaderViewDelegate.didTapSettingsButton()
     }
   
     func set(user: User, verifyStatus: Bool?) {
         nameLabel.text = user.name
+        
         if verifyStatus == true {
-            nameLabel.textColor = .white
+            emailLabel.textColor = .white
+            emailLabel.text = user.email
         } else {
-            nameLabel.textColor = .red
+            emailLabel.textColor = .red
+            emailLabel.text = "\(user.email) - Need verify(check emails)"
         }
         
     }
