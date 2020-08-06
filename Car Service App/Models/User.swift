@@ -21,4 +21,12 @@ struct User {
         self.password = password
   
     }
+    
+    init(uid: String, dictionary: [String:Any], password: String? = nil) {
+        self.uid = uid
+        self.name = dictionary["name"] as? String ?? ""
+        self.email = dictionary["email"] as? String ?? ""
+        self.cars = dictionary["cars"] as? [String] ?? []
+        self.password = password ?? ""
+    }
 }

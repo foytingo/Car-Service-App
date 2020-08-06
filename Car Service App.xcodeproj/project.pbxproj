@@ -15,7 +15,6 @@
 		46007BB224CEFD6A00A02F3C /* CSATitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46007BB124CEFD6A00A02F3C /* CSATitleLabel.swift */; };
 		46007BB424CEFDF600A02F3C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46007BB324CEFDF600A02F3C /* Constants.swift */; };
 		4613AF4024D95EA200DEDEDF /* AddCarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4613AF3F24D95EA200DEDEDF /* AddCarVC.swift */; };
-		4613AF4324D9722B00DEDEDF /* AddCarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4613AF4224D9722B00DEDEDF /* AddCarCell.swift */; };
 		464CD39724DAA070000601E8 /* CSASelectPropertiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464CD39624DAA070000601E8 /* CSASelectPropertiesView.swift */; };
 		464CD39924DAA996000601E8 /* BrandListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464CD39824DAA996000601E8 /* BrandListVC.swift */; };
 		464CD39B24DAB00F000601E8 /* YearListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464CD39A24DAB00F000601E8 /* YearListVC.swift */; };
@@ -35,6 +34,8 @@
 		46645C6224D193180099717A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46645C6124D193180099717A /* User.swift */; };
 		46645C6424D195B20099717A /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46645C6324D195B20099717A /* AuthManager.swift */; };
 		46645C6824D1A4EF0099717A /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46645C6724D1A4EF0099717A /* MainVC.swift */; };
+		4681780924DBFD63004E7490 /* MainHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4681780824DBFD63004E7490 /* MainHeaderView.swift */; };
+		4681780D24DC184B004E7490 /* CarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4681780C24DC184B004E7490 /* CarCell.swift */; };
 		46EE283524D17C9F00836C63 /* ForgotPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EE283424D17C9F00836C63 /* ForgotPasswordVC.swift */; };
 		46EE283724D18F6600836C63 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46EE283624D18F6600836C63 /* GoogleService-Info.plist */; };
 		808211CFFF1A032322E5AEC8 /* Pods_Car_Service_AppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD8CD89920ACA96CBD51B2E2 /* Pods_Car_Service_AppTests.framework */; };
@@ -63,7 +64,6 @@
 		46007BB124CEFD6A00A02F3C /* CSATitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSATitleLabel.swift; sourceTree = "<group>"; };
 		46007BB324CEFDF600A02F3C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4613AF3F24D95EA200DEDEDF /* AddCarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCarVC.swift; sourceTree = "<group>"; };
-		4613AF4224D9722B00DEDEDF /* AddCarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCarCell.swift; sourceTree = "<group>"; };
 		464CD39624DAA070000601E8 /* CSASelectPropertiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSASelectPropertiesView.swift; sourceTree = "<group>"; };
 		464CD39824DAA996000601E8 /* BrandListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandListVC.swift; sourceTree = "<group>"; };
 		464CD39A24DAB00F000601E8 /* YearListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearListVC.swift; sourceTree = "<group>"; };
@@ -87,6 +87,8 @@
 		46645C6124D193180099717A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		46645C6324D195B20099717A /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		46645C6724D1A4EF0099717A /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
+		4681780824DBFD63004E7490 /* MainHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHeaderView.swift; sourceTree = "<group>"; };
+		4681780C24DC184B004E7490 /* CarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarCell.swift; sourceTree = "<group>"; };
 		46EE283424D17C9F00836C63 /* ForgotPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordVC.swift; sourceTree = "<group>"; };
 		46EE283624D18F6600836C63 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		518BEB14FE31E644833FBAB7 /* Pods_Car_Service_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Car_Service_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -152,6 +154,7 @@
 			children = (
 				46007B9E24CED7B000A02F3C /* CSATextFieldView.swift */,
 				464CD39624DAA070000601E8 /* CSASelectPropertiesView.swift */,
+				4681780824DBFD63004E7490 /* MainHeaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -192,7 +195,7 @@
 		4613AF4424D9837700DEDEDF /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				4613AF4224D9722B00DEDEDF /* AddCarCell.swift */,
+				4681780C24DC184B004E7490 /* CarCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -476,11 +479,11 @@
 				46645C6424D195B20099717A /* AuthManager.swift in Sources */,
 				464CD39D24DAB01C000601E8 /* ModelListVC.swift in Sources */,
 				4653BBFB24CEC5AF009C2F6A /* AppDelegate.swift in Sources */,
+				4681780924DBFD63004E7490 /* MainHeaderView.swift in Sources */,
 				464CD3A624DAEBE8000601E8 /* Car.swift in Sources */,
 				464CD39724DAA070000601E8 /* CSASelectPropertiesView.swift in Sources */,
 				46007BB424CEFDF600A02F3C /* Constants.swift in Sources */,
 				46EE283524D17C9F00836C63 /* ForgotPasswordVC.swift in Sources */,
-				4613AF4324D9722B00DEDEDF /* AddCarCell.swift in Sources */,
 				4613AF4024D95EA200DEDEDF /* AddCarVC.swift in Sources */,
 				46645C6824D1A4EF0099717A /* MainVC.swift in Sources */,
 				46007BA124CEE47E00A02F3C /* CSATextField.swift in Sources */,
@@ -496,6 +499,7 @@
 				464CD39924DAA996000601E8 /* BrandListVC.swift in Sources */,
 				4653BBFD24CEC5AF009C2F6A /* SceneDelegate.swift in Sources */,
 				4653BC1F24CEC9D1009C2F6A /* LoginVC.swift in Sources */,
+				4681780D24DC184B004E7490 /* CarCell.swift in Sources */,
 				46007BA524CEF16D00A02F3C /* CSATextFieldTitleLabel.swift in Sources */,
 				46007B9F24CED7B000A02F3C /* CSATextFieldView.swift in Sources */,
 			);

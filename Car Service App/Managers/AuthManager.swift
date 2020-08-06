@@ -31,7 +31,6 @@ struct AuthManager {
             }
             
             guard let user = result?.user else { return }
-            
             user.sendEmailVerification { error in
                 if let error = error {
                     completed(.failure(error))

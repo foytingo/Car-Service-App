@@ -137,8 +137,8 @@ class LoginVC: CSALoadingVC  {
     }
     
     func presentMainVC(with uid: String) {
-        let mainVC = AddCarVC()
-        mainVC.uid = uid
+        let mainVC = MainVC()
+        //mainVC.uid = uid
         self.navigationController?.pushViewController(mainVC, animated: true)
     }
     

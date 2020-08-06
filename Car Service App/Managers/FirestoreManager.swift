@@ -11,10 +11,35 @@ import Firebase
 
 struct FirestoreManager {
     
+    static func fetchUser(uid: String, completed: @escaping(Result<User, Error>) -> Void) {
+        Firestore.firestore().collection("users").document(uid).getDocument { (snapshot, error) in
+            guard let dictionary = snapshot?.data() else { return }
+            
+            let user = User(uid: uid, dictionary: dictionary)
+            if let error = error {
+                completed(.failure(error))
+            }
+            completed(.success(user))
+        }
+    }
+    
+    static func fetchCar(uid: String, completed: @escaping(Result<Car, Error>) -> Void) {
+        Firestore.firestore().collection("cars").document(uid).getDocument { (snapshot, error) in
+            guard let dictionary = snapshot?.data() else { return }
+            
+            let car = Car(uid: UUID(uuidString: uid)!, dictionary: dictionary)
+            if let error = error {
+                completed(.failure(error))
+            }
+            completed(.success(car))
+        }
+    }
+        
+    
     static func uploadCar(userUid: String, car carData: Car, completed: @escaping(Result<String, Error>) -> Void) {
         
         let values = ["owner": userUid, "carID": carData.uid.uuidString, "brand": carData.brand, "year": carData.year, "mdoel": carData.model, "color": carData.color, "plateNumber": carData.plateNumber, "currentKm": carData.currentKm]
- 
+        
         
         
         Firestore.firestore().collection("cars").document(carData.uid.uuidString).setData(values) { (error) in

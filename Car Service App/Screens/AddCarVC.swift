@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddCarVC: UIViewController{
+class AddCarVC: CSALoadingVC{
     
     let titleLabel = CSATitleLabel()
     let brandSelectView = CSASelectPropertiesView(labelText: "Brand", tag: 0)
@@ -172,8 +172,11 @@ class AddCarVC: UIViewController{
         let newCar = Car(uid: UUID(), brand: brand, year: year, model: model, color: color, plateNumber: plateNumber, currentKm: currentKm)
        
         guard let uid = uid else { return }
+        
+        showLoadingView()
         FirestoreManager.uploadCar(userUid: uid , car: newCar) { [weak self] result in
             guard let self = self else { return }
+            self.dismissLoadingView()
             switch result {
             case .success(let uid):
                 self.presentMainVC(with: uid)
@@ -186,7 +189,7 @@ class AddCarVC: UIViewController{
     
     func presentMainVC(with uid: String) {
         let mainVC = MainVC()
-        mainVC.uid = uid
+        //mainVC.uid = uid
         self.navigationController?.pushViewController(mainVC, animated: true)
     }
     
