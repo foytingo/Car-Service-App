@@ -22,6 +22,7 @@ class AddCarVC: CSALoadingVC{
     let addLaterButton = CSATextButton(title: "Add Later", color: Colors.softBlue)
     
     var uid: String?
+    var isComingInApp = false
     
     var brand: String? {
         didSet { brandSelectView.detailLabel.text = brand }
@@ -179,7 +180,11 @@ class AddCarVC: CSALoadingVC{
             self.dismissLoadingView()
             switch result {
             case .success(let uid):
-                self.presentMainVC(with: uid)
+                if self.isComingInApp == false {
+                    self.presentMainVC(with: uid)
+                } else {
+                    self.dismiss(animated: true)
+                }
             case .failure(let error):
                 self.presentAlertWithOk(title: "Error", message: error.localizedDescription)
             }
@@ -197,12 +202,23 @@ class AddCarVC: CSALoadingVC{
     func configureAddLaterButton() {
         view.addSubview(addLaterButton)
         
+        addLaterButton.addTarget(self, action: #selector(handleAddLaterButton), for: .touchUpInside)
+        
         NSLayoutConstraint.activate([
             addLaterButton.bottomAnchor.constraint(equalTo: doneButton.bottomAnchor, constant: 50),
             addLaterButton.leadingAnchor.constraint(equalTo: currentKmView.leadingAnchor, constant: 30),
             addLaterButton.trailingAnchor.constraint(equalTo: currentKmView.trailingAnchor, constant: -30),
             addLaterButton.heightAnchor.constraint(equalToConstant: 40)
         ])
+    }
+    
+    @objc func handleAddLaterButton() {
+        if isComingInApp {
+            dismiss(animated: true)
+        } else {
+            let mainVC = MainVC()
+            self.navigationController?.pushViewController(mainVC, animated: true)
+        }
     }
     
     

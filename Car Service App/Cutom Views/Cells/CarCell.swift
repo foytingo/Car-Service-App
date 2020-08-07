@@ -128,8 +128,4 @@ class CarCell: UITableViewCell {
         carDetail.text = "\(car.brand) - \(car.year) - \(car.model)"
         carKm.text = "Current Kilometer: \(car.currentKm)"
     }
-    
-    func updateKM(with currentKm: String) {
-        carKm.text = "Current Kilometer: \(currentKm)"
-    }
 }

@@ -14,30 +14,39 @@ class MainVC: CSALoadingVC {
     let user = Auth.auth().currentUser
     var cars = [Car]() {
         didSet {
-            carsTableView.reloadData()
-            
+            DispatchQueue.main.async {
+                self.carsTableView.reloadData()
+            }
         }
     }
     
     let headerTitleLabel = CSATitleLabel()
     let headerView = MainHeaderView()
     let carsTitleLabel = CSATitleLabel()
+    let addCarButton = CSATextButton(title: "Add Car", color: Colors.softBlue)
+    let carTableViewTitleStackView = UIStackView()
     let carsTableView = UITableView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let user = user else { return }
-        DispatchQueue.global(qos: .userInitiated).async {
-            self.fetchUser(with: user.uid)
-        }
+        
         
         configureView()
         configureHeaderTitleLabel()
         configureHeaderView()
         configureCarsTitleLabel()
+        configureAddCarButton()
+        configureStackView()
         configureCarsTableView()
         
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        guard let user = user else { return }
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.cars.removeAll()
+            self.fetchUser(with: user.uid)
+        }
     }
     
     func fetchUser(with uid: String) {
@@ -100,13 +109,35 @@ class MainVC: CSALoadingVC {
     }
     
     func configureCarsTitleLabel(){
-        view.addSubview(carsTitleLabel)
-        
         carsTitleLabel.text = "My Cars"
+    }
+    
+    func configureAddCarButton() {
+        addCarButton.addTarget(self, action: #selector(handleAddCarButton), for: .touchUpInside)
+    }
+    
+    @objc func handleAddCarButton() {
+        let destVC = AddCarVC()
+        destVC.uid = user?.uid
+        destVC.isComingInApp = true
+        let navController = UINavigationController(rootViewController: destVC)
+        navController.modalPresentationStyle = .fullScreen
+        present(navController, animated: true)
+    }
+    
+    func configureStackView() {
+        view.addSubview(carTableViewTitleStackView)
+        
+        carTableViewTitleStackView.translatesAutoresizingMaskIntoConstraints = false
+        carTableViewTitleStackView.axis = .horizontal
+        carTableViewTitleStackView.distribution = .fill
+        carTableViewTitleStackView.addArrangedSubview(carsTitleLabel)
+        carTableViewTitleStackView.addArrangedSubview(addCarButton)
         
         NSLayoutConstraint.activate([
-            carsTitleLabel.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 30),
-            carsTitleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20)
+            carTableViewTitleStackView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 30),
+            carTableViewTitleStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            carTableViewTitleStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
         ])
     }
     
@@ -122,7 +153,7 @@ class MainVC: CSALoadingVC {
         carsTableView.dataSource = self
         
         NSLayoutConstraint.activate([
-            carsTableView.topAnchor.constraint(equalTo: carsTitleLabel.bottomAnchor, constant: 10),
+            carsTableView.topAnchor.constraint(equalTo: carTableViewTitleStackView.bottomAnchor, constant: 10),
             carsTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
             carsTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
             carsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10)
