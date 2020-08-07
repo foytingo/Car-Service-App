@@ -9,7 +9,7 @@
 import UIKit
 
 protocol CarCellDelegate: class {
-    func didTapActionButton()
+    func didTapActionButton(_ cell: CarCell)
 }
 
 class CarCell: UITableViewCell {
@@ -20,7 +20,7 @@ class CarCell: UITableViewCell {
     let carKm = UILabel()
     let stackView = UIStackView()
     let actionButton = UIButton()
-    
+    var car: Car?
     static let reuseID = "CarCell"
     
     weak var carCellDelegate: CarCellDelegate!
@@ -118,16 +118,18 @@ class CarCell: UITableViewCell {
     }
     
     @objc func handleActionButton() {
-        carCellDelegate.didTapActionButton()
+        carCellDelegate.didTapActionButton(self)
     }
     
  
     func set(car: Car) {
+        self.car = car
         carID.text = car.plateNumber.uppercased()
         carDetail.text = "\(car.brand) - \(car.year) - \(car.model)"
         carKm.text = "Current Kilometer: \(car.currentKm)"
-        
-        
     }
     
+    func updateKM(with currentKm: String) {
+        carKm.text = "Current Kilometer: \(currentKm)"
+    }
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 extension UIViewController {
     
@@ -44,6 +45,31 @@ extension UIViewController {
         present(ac, animated: true)
     }
     
+    
+    func presentActionSheetUserSettings(title: String, message: String) {
+        let ac = UIAlertController(title: "Settings", message: "Select Action", preferredStyle: .actionSheet)
+        
+        let otherActions = UIAlertAction(title: "Others", style: .default) { [weak self] action in
+            guard let self = self else { return }
+            self.presentAlertWithOk(title: "Other Action", message: "Other user action view controller will shown.")
+        }
+        let signOutAction = UIAlertAction(title: "Sign Out", style: .destructive) { [weak self] action in
+            guard let self = self else { return }
+            do {
+                try Auth.auth().signOut()
+                self.navigationController?.popToRootViewController(animated: true)
+            } catch let error {
+                print("Failed to sing out \(error.localizedDescription)")
+            }
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        ac.addAction(otherActions)
+        ac.addAction(signOutAction)
+        ac.addAction(cancelAction)
+        
+        self.present(ac, animated: true, completion: nil)
+    }
     
 }
 

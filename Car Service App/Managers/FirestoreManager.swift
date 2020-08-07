@@ -40,8 +40,6 @@ struct FirestoreManager {
         
         let values = ["owner": userUid, "carID": carData.uid.uuidString, "brand": carData.brand, "year": carData.year, "mdoel": carData.model, "color": carData.color, "plateNumber": carData.plateNumber, "currentKm": carData.currentKm]
         
-        
-        
         Firestore.firestore().collection("cars").document(carData.uid.uuidString).setData(values) { (error) in
             if let error = error {
                 completed(.failure(error))
@@ -51,5 +49,14 @@ struct FirestoreManager {
         completed(.success(userUid))
     }
     
+    static func updateKm(currentKM: String, car carData: Car, completed: @escaping(Result<String, Error>) -> Void) {
+        Firestore.firestore().collection("cars").document(carData.uid.uuidString).updateData(["currentKm" : currentKM]) { error in
+            if let error = error {
+                completed(.failure(error))
+            } else {
+                completed(.success(currentKM))
+            }
+        }
+    }
     
 }

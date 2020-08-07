@@ -146,23 +146,36 @@ extension MainVC: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension MainVC: CarCellDelegate {
-    func didTapActionButton() {
-        //change with textfieldalert
-        presentAlertWithOk(title: "Update KM", message: "km textfield was here")
+    func didTapActionButton(_ cell: CarCell) {
+        let indexPath = carsTableView.indexPath(for: cell)!
+        
+        presentAlertWithTextField(title: "Update Kilometer", message: "Update this car kilometer", placeholder: "Enter current km") { newCurrentKm in
+            self.showLoadingView()
+            if Int(newCurrentKm) ?? 0 < Int(self.cars[indexPath.row].currentKm) ?? 0 {
+                self.dismissLoadingView()
+                self.presentAlertWithOk(title: "Error", message: "You can not enter lower kilometer than current kilometer.")
+            } else {
+                FirestoreManager.updateKm(currentKM: newCurrentKm, car: cell.car!) { [weak self] result in
+                    guard let self = self else {return}
+                    self.dismissLoadingView()
+                    switch result {
+                    case .success(let currentKm):
+                        self.cars[indexPath.row].currentKm = currentKm
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
+            }
+            
+        }
     }
+    
 }
 
 extension MainVC: MainHeaderViewDelegate {
     func didTapSettingsButton() {
-        //change with settings page
-        do{
-            try Auth.auth().signOut()
-             navigationController?.popToRootViewController(animated: true)
-        } catch let error {
-            print("Failed to sing out \(error.localizedDescription)")
-        }
+        presentActionSheetUserSettings(title: "Settings", message: "Select Action")
         
-       
     }
     
     
