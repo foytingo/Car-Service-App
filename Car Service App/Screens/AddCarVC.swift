@@ -193,7 +193,7 @@ class AddCarVC: CSALoadingVC{
     
     
     func presentMainVC(with uid: String) {
-        let mainVC = MainVC()
+        let mainVC = MyAccountVC()
         //mainVC.uid = uid
         self.navigationController?.pushViewController(mainVC, animated: true)
     }
@@ -216,7 +216,7 @@ class AddCarVC: CSALoadingVC{
         if isComingInApp {
             dismiss(animated: true)
         } else {
-            let mainVC = MainVC()
+            let mainVC = MyAccountVC()
             self.navigationController?.pushViewController(mainVC, animated: true)
         }
     }

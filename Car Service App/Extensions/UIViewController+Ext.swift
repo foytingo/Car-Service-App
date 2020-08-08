@@ -29,14 +29,14 @@ extension UIViewController {
         ac.addTextField { (textfield) in
             textfield.placeholder = placeholder
         }
-
+        
         ac.addAction(UIAlertAction(title: "Save", style: .default, handler: { [weak ac] (_) in
             guard let ac = ac else { return }
             let textfield = ac.textFields![0]
             if textfield.text == ""{
                 completion!("Not entered")
             } else {
-               completion!(textfield.text!)
+                completion!(textfield.text!)
             }
             
         }))

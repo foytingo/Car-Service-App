@@ -98,7 +98,7 @@ class CarCell: UITableViewCell {
         
         actionButton.translatesAutoresizingMaskIntoConstraints = false
         actionButton.backgroundColor = Colors.softBlue
-        actionButton.setTitle("UPDATE KM", for: .normal)
+        actionButton.setTitle("SET", for: .normal)
         actionButton.layer.cornerRadius = 5
         actionButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .footnote)
         actionButton.titleLabel?.textAlignment = .center

@@ -9,9 +9,10 @@
 import UIKit
 import Firebase
 
-class MainVC: CSALoadingVC {
+class MyAccountVC: CSALoadingVC {
     
     let user = Auth.auth().currentUser
+    
     var cars = [Car]() {
         didSet {
             DispatchQueue.main.async {
@@ -22,6 +23,7 @@ class MainVC: CSALoadingVC {
     
     let headerTitleLabel = CSATitleLabel()
     let headerView = MainHeaderView()
+    
     let carsTitleLabel = CSATitleLabel()
     let addCarButton = CSATextButton(title: "Add Car", color: Colors.softBlue)
     let carTableViewTitleStackView = UIStackView()
@@ -29,17 +31,13 @@ class MainVC: CSALoadingVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         configureView()
         configureHeaderTitleLabel()
         configureHeaderView()
-        configureCarsTitleLabel()
-        configureAddCarButton()
-        configureStackView()
+        configureCarTableViewTitleStackView()
         configureCarsTableView()
-        
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         guard let user = user else { return }
@@ -49,42 +47,12 @@ class MainVC: CSALoadingVC {
         }
     }
     
-    func fetchUser(with uid: String) {
-        showLoadingView()
-        FirestoreManager.fetchUser(uid: uid) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let user):
-                self.headerView.set(user: user, verifyStatus: self.user?.isEmailVerified)
-                self.fetchUsersCars(with: user)
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-    
-    func fetchUsersCars(with user: User) {
-        for car in user.cars {
-            FirestoreManager.fetchCar(uid: car) { [weak self] result in
-                guard let self = self else { return }
-                self.dismissLoadingView()
-                switch result {
-                case .success(let car):
-                    self.cars.append(car)
-                case .failure(let error):
-                    print(error)
-                }
-            }
-        }
-        
-        
-    }
     
     func configureView() {
         navigationController?.setNavigationBarHidden(true, animated: true)
         view.backgroundColor = Colors.darkBlue
-        
     }
+    
     
     func configureHeaderTitleLabel() {
         view.addSubview(headerTitleLabel)
@@ -97,9 +65,12 @@ class MainVC: CSALoadingVC {
         ])
     }
     
+    
     func configureHeaderView() {
         view.addSubview(headerView)
+        
         headerView.mainHeaderViewDelegate = self
+        
         NSLayoutConstraint.activate([
             headerView.topAnchor.constraint(equalTo: headerTitleLabel.bottomAnchor, constant: 10),
             headerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
@@ -108,13 +79,27 @@ class MainVC: CSALoadingVC {
         ])
     }
     
-    func configureCarsTitleLabel(){
+    
+    func configureCarTableViewTitleStackView() {
+        view.addSubview(carTableViewTitleStackView)
+        
         carsTitleLabel.text = "My Cars"
+        addCarButton.addTarget(self, action: #selector(handleAddCarButton), for: .touchUpInside)
+        
+        carTableViewTitleStackView.translatesAutoresizingMaskIntoConstraints = false
+        carTableViewTitleStackView.axis = .horizontal
+        carTableViewTitleStackView.distribution = .fill
+        carTableViewTitleStackView.alignment = .firstBaseline
+        carTableViewTitleStackView.addArrangedSubview(carsTitleLabel)
+        carTableViewTitleStackView.addArrangedSubview(addCarButton)
+        
+        NSLayoutConstraint.activate([
+            carTableViewTitleStackView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 30),
+            carTableViewTitleStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            carTableViewTitleStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -45),
+        ])
     }
     
-    func configureAddCarButton() {
-        addCarButton.addTarget(self, action: #selector(handleAddCarButton), for: .touchUpInside)
-    }
     
     @objc func handleAddCarButton() {
         let destVC = AddCarVC()
@@ -125,21 +110,6 @@ class MainVC: CSALoadingVC {
         present(navController, animated: true)
     }
     
-    func configureStackView() {
-        view.addSubview(carTableViewTitleStackView)
-        
-        carTableViewTitleStackView.translatesAutoresizingMaskIntoConstraints = false
-        carTableViewTitleStackView.axis = .horizontal
-        carTableViewTitleStackView.distribution = .fill
-        carTableViewTitleStackView.addArrangedSubview(carsTitleLabel)
-        carTableViewTitleStackView.addArrangedSubview(addCarButton)
-        
-        NSLayoutConstraint.activate([
-            carTableViewTitleStackView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 30),
-            carTableViewTitleStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            carTableViewTitleStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-        ])
-    }
     
     func configureCarsTableView() {
         view.addSubview(carsTableView)
@@ -159,55 +129,37 @@ class MainVC: CSALoadingVC {
             carsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10)
         ])
     }
-}
-
-extension MainVC: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cars.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CarCell.reuseID, for: indexPath) as! CarCell
-        cell.set(car: cars[indexPath.row])
-        cell.carCellDelegate = self
-        return cell
-    }
     
     
-}
-
-extension MainVC: CarCellDelegate {
-    func didTapActionButton(_ cell: CarCell) {
-        let indexPath = carsTableView.indexPath(for: cell)!
-        
-        presentAlertWithTextField(title: "Update Kilometer", message: "Update this car kilometer", placeholder: "Enter current km") { newCurrentKm in
-            self.showLoadingView()
-            if Int(newCurrentKm) ?? 0 < Int(self.cars[indexPath.row].currentKm) ?? 0 {
-                self.dismissLoadingView()
-                self.presentAlertWithOk(title: "Error", message: "You can not enter lower kilometer than current kilometer.")
-            } else {
-                FirestoreManager.updateKm(currentKM: newCurrentKm, car: cell.car!) { [weak self] result in
-                    guard let self = self else {return}
-                    self.dismissLoadingView()
-                    switch result {
-                    case .success(let currentKm):
-                        self.cars[indexPath.row].currentKm = currentKm
-                    case .failure(let error):
-                        print(error)
-                    }
-                }
+    private func fetchUser(with uid: String) {
+        showLoadingView()
+        FirestoreManager.fetchUser(uid: uid) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let user):
+                self.headerView.set(user: user, verifyStatus: self.user?.isEmailVerified)
+                self.fetchUsersCars(with: user)
+            case .failure(let error):
+                print(error)
             }
-            
         }
     }
     
+    
+    private func fetchUsersCars(with user: User) {
+        for car in user.cars {
+            FirestoreManager.fetchCar(uid: car) { [weak self] result in
+                guard let self = self else { return }
+                self.dismissLoadingView()
+                switch result {
+                case .success(let car):
+                    self.cars.append(car)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+    }
 }
 
-extension MainVC: MainHeaderViewDelegate {
-    func didTapSettingsButton() {
-        presentActionSheetUserSettings(title: "Settings", message: "Select Action")
-        
-    }
-    
-    
-}
+
