@@ -17,6 +17,7 @@ struct Car {
     var color: String
     var plateNumber: String
     var currentKm: String
+    var appointments: [String] = []
     
     init (owner: String, uid: UUID, brand: String, year: String, model: String, color: String, plateNumber: String, currentKm: String) {
         self.owner = owner
@@ -33,10 +34,11 @@ struct Car {
         self.uid = uid
         self.brand = dictionary["brand"] as? String ?? ""
         self.year = dictionary["year"] as? String ?? ""
-        self.model = dictionary["mdoel"] as? String ?? ""
+        self.model = dictionary["model"] as? String ?? ""
         self.color = dictionary["color"] as? String ?? ""
         self.plateNumber = dictionary["plateNumber"] as? String ?? ""
         self.currentKm = dictionary["currentKm"] as? String ?? ""
         self.owner = dictionary["owner"] as? String ?? ""
+        self.appointments = dictionary["appointment"] as? [String] ?? []
     }
 }

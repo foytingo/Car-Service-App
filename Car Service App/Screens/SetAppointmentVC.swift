@@ -106,7 +106,7 @@ class SetAppointmentVC: CSALoadingVC {
         guard let date = dateTextFieldView.textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
         guard let car = car else { return }
         
-        let newAppointment = Appointment(uid: UUID(), car: car, phoneNumber: number, date: date)
+        let newAppointment = Appointment(uid: UUID(), car: car.uid.uuidString, carOwner: car.owner, phoneNumber: number, date: date)
         
         showLoadingView()
         FirestoreManager.createAppointment(appointment: newAppointment) { [weak self] result in

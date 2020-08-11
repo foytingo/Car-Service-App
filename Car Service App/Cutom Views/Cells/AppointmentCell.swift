@@ -1,48 +1,45 @@
 //
-//  CarCell.swift
+//  AppointmentCell.swift
 //  Car Service App
 //
-//  Created by Murat Baykor on 6.08.2020.
+//  Created by Murat Baykor on 11.08.2020.
 //  Copyright © 2020 Murat Baykor. All rights reserved.
 //
 
 import UIKit
 
-protocol CarCellDelegate: class {
-    func didTapActionButton(_ cell: CarCell)
+protocol AppointmentCellDelegate: class {
+    func didTapActionButton(_ cell: AppointmentCell)
 }
 
-class CarCell: UITableViewCell {
+class AppointmentCell: UITableViewCell {
     
     let backView = UIView()
     let carDetail = UILabel()
-    let carID = UILabel()
-    let carKm = UILabel()
+    let phoneNumber = UILabel()
+    let date = UILabel()
     let stackView = UIStackView()
     let actionButton = UIButton()
     
-    var car: Car?
+    var appointment: Appointment?
+    static let reuseID = "AppointmentCell"
     
-    static let reuseID = "CarCell"
-    
-    weak var carCellDelegate: CarCellDelegate!
+    weak var appointmentCellDelegate: AppointmentCellDelegate!
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureBackView()
-        configureCarId()
-        configureCarKm()
         configureCarDetail()
+        configureDate()
+        configurePhoneNumber()
         configureStackView()
         configureActionButton()
         backgroundColor = .clear
-        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
     private func configureBackView() {
         addSubview(backView)
@@ -58,35 +55,34 @@ class CarCell: UITableViewCell {
         ])
     }
     
-    private func configureCarId() {
-        carID.translatesAutoresizingMaskIntoConstraints = false
-        carID.textColor = .white
-        carID.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-    }
-    
-    private func configureCarKm() {
-        carKm.translatesAutoresizingMaskIntoConstraints = false
-        carKm.textColor = .white
-        carKm.font = UIFont.systemFont(ofSize: 18, weight: .medium)
-        
+    private func configurePhoneNumber() {
+        phoneNumber.translatesAutoresizingMaskIntoConstraints = false
+        phoneNumber.textColor = .white
+        phoneNumber.font = UIFont.systemFont(ofSize: 14, weight: .bold)
     }
     
     private func configureCarDetail() {
         carDetail.translatesAutoresizingMaskIntoConstraints = false
         carDetail.textColor = .white
-        carKm.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+        carDetail.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+    }
+    
+    private func configureDate() {
+        date.translatesAutoresizingMaskIntoConstraints = false
+        date.textColor = .white
+        date.font = UIFont.systemFont(ofSize: 18, weight: .bold)
     }
     
     private func configureStackView() {
         backView.addSubview(stackView)
-
+        
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.distribution = .equalCentering
-       
-        stackView.addArrangedSubview(carID)
+        
+        stackView.addArrangedSubview(date)
+        stackView.addArrangedSubview(phoneNumber)
         stackView.addArrangedSubview(carDetail)
-        stackView.addArrangedSubview(carKm)
         
         NSLayoutConstraint.activate([
             stackView.centerYAnchor.constraint(equalTo: backView.centerYAnchor),
@@ -99,8 +95,8 @@ class CarCell: UITableViewCell {
         backView.addSubview(actionButton)
         
         actionButton.translatesAutoresizingMaskIntoConstraints = false
-        actionButton.backgroundColor = Colors.softBlue
-        actionButton.setTitle("SET", for: .normal)
+        actionButton.backgroundColor = .systemRed
+        actionButton.setTitle("Delete", for: .normal)
         actionButton.layer.cornerRadius = 5
         actionButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .footnote)
         actionButton.titleLabel?.textAlignment = .center
@@ -120,14 +116,13 @@ class CarCell: UITableViewCell {
     }
     
     @objc func handleActionButton() {
-        carCellDelegate.didTapActionButton(self)
+        appointmentCellDelegate.didTapActionButton(self)
     }
     
- 
-    func set(car: Car) {
-        self.car = car
-        carID.text = car.plateNumber.uppercased()
-        carDetail.text = "\(car.brand) - \(car.year) - \(car.model)"
-        carKm.text = "Current Kilometer: \(car.currentKm)"
+    func set(appointment: Appointment) {
+        self.appointment = appointment
+        date.text = appointment.date
+        carDetail.text = "Kilometer: 9999"
+        phoneNumber.text = appointment.phoneNumber
     }
 }

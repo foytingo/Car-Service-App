@@ -40,6 +40,8 @@
 		4681780924DBFD63004E7490 /* MainHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4681780824DBFD63004E7490 /* MainHeaderView.swift */; };
 		4681780D24DC184B004E7490 /* CarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4681780C24DC184B004E7490 /* CarCell.swift */; };
 		468252D224E29C5200BA62C3 /* Appointment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468252D124E29C5200BA62C3 /* Appointment.swift */; };
+		468252D424E2A1AD00BA62C3 /* ShowAppointmentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468252D324E2A1AD00BA62C3 /* ShowAppointmentsVC.swift */; };
+		468252D624E2A85B00BA62C3 /* AppointmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468252D524E2A85B00BA62C3 /* AppointmentCell.swift */; };
 		46EE283524D17C9F00836C63 /* ForgotPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EE283424D17C9F00836C63 /* ForgotPasswordVC.swift */; };
 		46EE283724D18F6600836C63 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46EE283624D18F6600836C63 /* GoogleService-Info.plist */; };
 		808211CFFF1A032322E5AEC8 /* Pods_Car_Service_AppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD8CD89920ACA96CBD51B2E2 /* Pods_Car_Service_AppTests.framework */; };
@@ -97,6 +99,8 @@
 		4681780824DBFD63004E7490 /* MainHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHeaderView.swift; sourceTree = "<group>"; };
 		4681780C24DC184B004E7490 /* CarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarCell.swift; sourceTree = "<group>"; };
 		468252D124E29C5200BA62C3 /* Appointment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appointment.swift; sourceTree = "<group>"; };
+		468252D324E2A1AD00BA62C3 /* ShowAppointmentsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAppointmentsVC.swift; sourceTree = "<group>"; };
+		468252D524E2A85B00BA62C3 /* AppointmentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentCell.swift; sourceTree = "<group>"; };
 		46EE283424D17C9F00836C63 /* ForgotPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordVC.swift; sourceTree = "<group>"; };
 		46EE283624D18F6600836C63 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		518BEB14FE31E644833FBAB7 /* Pods_Car_Service_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Car_Service_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -155,6 +159,7 @@
 				464CD39C24DAB01C000601E8 /* ModelListVC.swift */,
 				464CD39E24DAB02B000601E8 /* ColorListVC.swift */,
 				466CF02424E1760F00B533B3 /* SetAppointmentVC.swift */,
+				468252D324E2A1AD00BA62C3 /* ShowAppointmentsVC.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -206,6 +211,7 @@
 			isa = PBXGroup;
 			children = (
 				4681780C24DC184B004E7490 /* CarCell.swift */,
+				468252D524E2A85B00BA62C3 /* AppointmentCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -502,12 +508,14 @@
 				46645C6824D1A4EF0099717A /* MyAccountVC.swift in Sources */,
 				46007BA124CEE47E00A02F3C /* CSATextField.swift in Sources */,
 				4653BC2124CEC9E0009C2F6A /* RegisterVC.swift in Sources */,
+				468252D424E2A1AD00BA62C3 /* ShowAppointmentsVC.swift in Sources */,
 				466CF02524E1760F00B533B3 /* SetAppointmentVC.swift in Sources */,
 				4655EB1624D2C0410060DEC7 /* UIViewController+Ext.swift in Sources */,
 				468252D224E29C5200BA62C3 /* Appointment.swift in Sources */,
 				4655EB1424D2BDEE0060DEC7 /* CSALoadingVC.swift in Sources */,
 				46007BAE24CEF57900A02F3C /* CSAAuthButton.swift in Sources */,
 				46007BB024CEF82100A02F3C /* CSATextButton.swift in Sources */,
+				468252D624E2A85B00BA62C3 /* AppointmentCell.swift in Sources */,
 				464CD3A424DAEB89000601E8 /* FirestoreManager.swift in Sources */,
 				464CD39F24DAB02B000601E8 /* ColorListVC.swift in Sources */,
 				464CD39B24DAB00F000601E8 /* YearListVC.swift in Sources */,

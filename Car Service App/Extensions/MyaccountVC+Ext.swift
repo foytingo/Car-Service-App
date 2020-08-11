@@ -39,6 +39,13 @@ extension MyAccountVC: CarCellDelegate {
             self.navigationController?.pushViewController(destVC, animated: true)
         }
         
+        let showAppointment = UIAlertAction(title: "Show Appointments", style: .default) { [weak self] action in
+            guard let self = self else { return }
+            let destVC = ShowAppointmentsVC()
+            destVC.car = car
+            self.navigationController?.pushViewController(destVC, animated: true)
+        }
+        
         let updateKM = UIAlertAction(title: "Update Kilometer", style: .default) { [weak self] action in
             guard let self = self else { return }
             self.presentAlertWithTextField(title: "Update Kilometer", message: "Update this car kilometer", placeholder: "Enter current km") { newCurrentKm in
@@ -70,6 +77,7 @@ extension MyAccountVC: CarCellDelegate {
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         
         ac.addAction(updateKM)
+        ac.addAction(showAppointment)
         ac.addAction(appointment)
         ac.addAction(deleteCar)
         ac.addAction(cancelAction)

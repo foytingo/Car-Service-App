@@ -34,11 +34,23 @@ struct FirestoreManager {
             completed(.success(car))
         }
     }
+    
+    static func fetcAppointments(uid: String, car: Car, completed: @escaping(Result<Appointment, Error>) -> Void) {
+        Firestore.firestore().collection("appointments").document(uid).getDocument { (snapshot, error) in
+            guard let dictionary = snapshot?.data() else { return }
+            
+            let appointment = Appointment(uid: UUID(uuidString: uid)!, dictionary: dictionary)
+            if let error = error {
+                completed(.failure(error))
+            }
+            completed(.success(appointment))
+        }
+    }
         
     
     static func uploadCar(userUid: String, car carData: Car, completed: @escaping(Result<String, Error>) -> Void) {
         
-        let values = ["owner": userUid, "carID": carData.uid.uuidString, "brand": carData.brand, "year": carData.year, "mdoel": carData.model, "color": carData.color, "plateNumber": carData.plateNumber, "currentKm": carData.currentKm]
+        let values = ["owner": userUid, "carID": carData.uid.uuidString, "brand": carData.brand, "year": carData.year, "model": carData.model, "color": carData.color, "plateNumber": carData.plateNumber, "currentKm": carData.currentKm, "appointment": carData.appointments] as [String : Any]
         
         Firestore.firestore().collection("cars").document(carData.uid.uuidString).setData(values) { (error) in
             if let error = error {
@@ -61,13 +73,19 @@ struct FirestoreManager {
     
     static func createAppointment(appointment: Appointment, completed: @escaping(Result<String, Error>) -> Void) {
         
-        let values = ["uid": appointment.uid.uuidString, "owner": appointment.car.owner, "car": appointment.car.uid.uuidString, "number": appointment.phoneNumber, "date": appointment.date]
+        let values = ["uid": appointment.uid.uuidString,
+                      "car": appointment.car,
+                      "carOwner": appointment.carOwner,
+                      "number": appointment.phoneNumber,
+                      "date": appointment.date]
         
         Firestore.firestore().collection("appointments").document(appointment.uid.uuidString).setData(values) { (error) in
             if let error = error {
                 completed(.failure(error))
             }
-            Firestore.firestore().collection("users").document(appointment.car.owner).updateData(["apppointment": FieldValue.arrayUnion([appointment.uid.uuidString])])
+            Firestore.firestore().collection("users").document(appointment.carOwner).updateData(["appointment": FieldValue.arrayUnion([appointment.uid.uuidString])])
+            
+            Firestore.firestore().collection("cars").document(appointment.car).updateData(["appointment": FieldValue.arrayUnion([appointment.uid.uuidString])])
         }
         completed(.success("success"))
     }

@@ -40,6 +40,7 @@ class MyAccountVC: CSALoadingVC {
     
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         guard let user = user else { return }
         DispatchQueue.global(qos: .userInitiated).async {
             self.cars.removeAll()
@@ -137,7 +138,7 @@ class MyAccountVC: CSALoadingVC {
             guard let self = self else { return }
             switch result {
             case .success(let user):
-                self.headerView.set(user: user)
+                self.headerView.set(title: user.name, detail: user.email)
                 self.fetchUsersCars(with: user)
             case .failure(let error):
                 print(error)

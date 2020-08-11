@@ -14,8 +14,8 @@ protocol MainHeaderViewDelegate: class {
 
 class MainHeaderView: UIView {
     
-    let nameLabel = UILabel()
-    let emailLabel = UILabel()
+    let titleLabel = UILabel()
+    let detailLabel = UILabel()
     let stackView = UIStackView()
     let settingsButton = UIButton(type: .custom)
         
@@ -25,7 +25,7 @@ class MainHeaderView: UIView {
         super.init(frame: frame)
         
         configureView()
-        configureNameLabel()
+        configureTitleLabel()
         configureEmailLabel()
         configureStackView()
         configureSettingsButton()
@@ -42,16 +42,16 @@ class MainHeaderView: UIView {
 
     }
     
-    private func configureNameLabel() {
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        nameLabel.textColor = .white
-        nameLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+    private func configureTitleLabel() {
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.textColor = .white
+        titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
     }
     
     private func configureEmailLabel() {
-           emailLabel.translatesAutoresizingMaskIntoConstraints = false
-           emailLabel.textColor = .white
-           emailLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+           detailLabel.translatesAutoresizingMaskIntoConstraints = false
+           detailLabel.textColor = .white
+           detailLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
        }
     
     
@@ -61,8 +61,8 @@ class MainHeaderView: UIView {
         stackView.axis          = .vertical
         stackView.distribution  = .equalSpacing
         
-        stackView.addArrangedSubview(nameLabel)
-        stackView.addArrangedSubview(emailLabel)
+        stackView.addArrangedSubview(titleLabel)
+        stackView.addArrangedSubview(detailLabel)
         
         NSLayoutConstraint.activate([
             stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
@@ -96,9 +96,9 @@ class MainHeaderView: UIView {
         mainHeaderViewDelegate.didTapSettingsButton()
     }
   
-    func set(user: User) {
-        nameLabel.text = user.name
-        emailLabel.text = user.email
+    func set(title: String, detail: String) {
+        titleLabel.text = title
+        detailLabel.text = detail
     }
 
 }
