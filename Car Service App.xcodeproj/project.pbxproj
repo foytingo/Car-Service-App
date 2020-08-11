@@ -34,6 +34,8 @@
 		46645C6224D193180099717A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46645C6124D193180099717A /* User.swift */; };
 		46645C6424D195B20099717A /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46645C6324D195B20099717A /* AuthManager.swift */; };
 		46645C6824D1A4EF0099717A /* MyAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46645C6724D1A4EF0099717A /* MyAccountVC.swift */; };
+		466CF02524E1760F00B533B3 /* SetAppointmentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466CF02424E1760F00B533B3 /* SetAppointmentVC.swift */; };
+		466CF02724E17D3A00B533B3 /* CSASecondTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466CF02624E17D3A00B533B3 /* CSASecondTitleLabel.swift */; };
 		467B82AE24DEAA2800B23572 /* MyaccountVC+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467B82AD24DEAA2800B23572 /* MyaccountVC+Ext.swift */; };
 		4681780924DBFD63004E7490 /* MainHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4681780824DBFD63004E7490 /* MainHeaderView.swift */; };
 		4681780D24DC184B004E7490 /* CarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4681780C24DC184B004E7490 /* CarCell.swift */; };
@@ -88,6 +90,8 @@
 		46645C6124D193180099717A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		46645C6324D195B20099717A /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		46645C6724D1A4EF0099717A /* MyAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountVC.swift; sourceTree = "<group>"; };
+		466CF02424E1760F00B533B3 /* SetAppointmentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAppointmentVC.swift; sourceTree = "<group>"; };
+		466CF02624E17D3A00B533B3 /* CSASecondTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSASecondTitleLabel.swift; sourceTree = "<group>"; };
 		467B82AD24DEAA2800B23572 /* MyaccountVC+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "My\U0010accountVC+Ext.swift"; sourceTree = "<group>"; };
 		4681780824DBFD63004E7490 /* MainHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHeaderView.swift; sourceTree = "<group>"; };
 		4681780C24DC184B004E7490 /* CarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarCell.swift; sourceTree = "<group>"; };
@@ -131,6 +135,7 @@
 			children = (
 				46007BA424CEF16D00A02F3C /* CSATextFieldTitleLabel.swift */,
 				46007BB124CEFD6A00A02F3C /* CSATitleLabel.swift */,
+				466CF02624E17D3A00B533B3 /* CSASecondTitleLabel.swift */,
 			);
 			path = Labels;
 			sourceTree = "<group>";
@@ -147,6 +152,7 @@
 				464CD39A24DAB00F000601E8 /* YearListVC.swift */,
 				464CD39C24DAB01C000601E8 /* ModelListVC.swift */,
 				464CD39E24DAB02B000601E8 /* ColorListVC.swift */,
+				466CF02424E1760F00B533B3 /* SetAppointmentVC.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -489,9 +495,11 @@
 				46EE283524D17C9F00836C63 /* ForgotPasswordVC.swift in Sources */,
 				467B82AE24DEAA2800B23572 /* MyaccountVC+Ext.swift in Sources */,
 				4613AF4024D95EA200DEDEDF /* AddCarVC.swift in Sources */,
+				466CF02724E17D3A00B533B3 /* CSASecondTitleLabel.swift in Sources */,
 				46645C6824D1A4EF0099717A /* MyAccountVC.swift in Sources */,
 				46007BA124CEE47E00A02F3C /* CSATextField.swift in Sources */,
 				4653BC2124CEC9E0009C2F6A /* RegisterVC.swift in Sources */,
+				466CF02524E1760F00B533B3 /* SetAppointmentVC.swift in Sources */,
 				4655EB1624D2C0410060DEC7 /* UIViewController+Ext.swift in Sources */,
 				4655EB1424D2BDEE0060DEC7 /* CSALoadingVC.swift in Sources */,
 				46007BAE24CEF57900A02F3C /* CSAAuthButton.swift in Sources */,

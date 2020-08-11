@@ -9,7 +9,7 @@
 import UIKit
 
 enum TextFieldType {
-    case email, password, name
+    case email, password, name, phone, appointment
 }
 
 protocol CSATextFieldViewDelegate {
@@ -24,6 +24,8 @@ class CSATextFieldView: UIView {
     let lineView = UIView()
     
     var delegate: CSATextFieldViewDelegate?
+    
+    let datePicker = UIDatePicker()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -109,6 +111,29 @@ class CSATextFieldView: UIView {
         textFieldTitle.textColor = .white
         lineView.backgroundColor = .white
     }
+    
+    func createDatePicker() {
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        let doneBtn = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressed))
+        toolbar.setItems([doneBtn], animated: true)
+        
+        textField.inputAccessoryView = toolbar
+        
+        textField.inputView = datePicker
+        datePicker.datePickerMode = .dateAndTime
+    }
+    
+    @objc func donePressed() {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .medium
+        
+        textField.text = formatter.string(from: datePicker.date)
+
+        self.endEditing(true)
+    }
 
     
     
@@ -126,11 +151,19 @@ class CSATextFieldView: UIView {
             if forgotPasswordOn {
                 configureForgotPasswordButton()
             }
-            
         case .name:
             textFieldTitle.text = "Name"
             textField.textContentType = .name
             textField.keyboardType = .default
+        case .phone:
+            textFieldTitle.text = "Phone Number"
+            textField.textContentType = .telephoneNumber
+            textField.keyboardType = .namePhonePad
+        case .appointment:
+            textFieldTitle.text = "Set Date"
+            createDatePicker()
+//            textField.textContentType = .telephoneNumber
+//            textField.keyboardType = .namePhonePad
         }
         
     }

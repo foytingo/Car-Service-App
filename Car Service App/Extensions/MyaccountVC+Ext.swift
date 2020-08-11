@@ -33,8 +33,10 @@ extension MyAccountVC: CarCellDelegate {
         let ac = UIAlertController(title: car.plateNumber.uppercased(), message: "Select action", preferredStyle: .actionSheet)
         
         let appointment = UIAlertAction(title: "Set Appointment", style: .default) { [weak self] action in
-            guard self != nil else { return }
-            print("show appintmentVC")
+            guard let self = self else { return }
+            let destVC = SetAppointmentVC()
+            destVC.car = car
+            self.navigationController?.pushViewController(destVC, animated: true)
         }
         
         let updateKM = UIAlertAction(title: "Update Kilometer", style: .default) { [weak self] action in
