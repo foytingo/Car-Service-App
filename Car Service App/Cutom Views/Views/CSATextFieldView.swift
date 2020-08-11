@@ -158,12 +158,10 @@ class CSATextFieldView: UIView {
         case .phone:
             textFieldTitle.text = "Phone Number"
             textField.textContentType = .telephoneNumber
-            textField.keyboardType = .namePhonePad
+            textField.keyboardType = .numberPad
         case .appointment:
             textFieldTitle.text = "Set Date"
             createDatePicker()
-//            textField.textContentType = .telephoneNumber
-//            textField.keyboardType = .namePhonePad
         }
         
     }

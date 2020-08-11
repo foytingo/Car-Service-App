@@ -137,7 +137,7 @@ class MyAccountVC: CSALoadingVC {
             guard let self = self else { return }
             switch result {
             case .success(let user):
-                self.headerView.set(user: user, verifyStatus: self.user?.isEmailVerified)
+                self.headerView.set(user: user)
                 self.fetchUsersCars(with: user)
             case .failure(let error):
                 print(error)

@@ -39,6 +39,7 @@
 		467B82AE24DEAA2800B23572 /* MyaccountVC+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467B82AD24DEAA2800B23572 /* MyaccountVC+Ext.swift */; };
 		4681780924DBFD63004E7490 /* MainHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4681780824DBFD63004E7490 /* MainHeaderView.swift */; };
 		4681780D24DC184B004E7490 /* CarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4681780C24DC184B004E7490 /* CarCell.swift */; };
+		468252D224E29C5200BA62C3 /* Appointment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468252D124E29C5200BA62C3 /* Appointment.swift */; };
 		46EE283524D17C9F00836C63 /* ForgotPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EE283424D17C9F00836C63 /* ForgotPasswordVC.swift */; };
 		46EE283724D18F6600836C63 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46EE283624D18F6600836C63 /* GoogleService-Info.plist */; };
 		808211CFFF1A032322E5AEC8 /* Pods_Car_Service_AppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD8CD89920ACA96CBD51B2E2 /* Pods_Car_Service_AppTests.framework */; };
@@ -95,6 +96,7 @@
 		467B82AD24DEAA2800B23572 /* MyaccountVC+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "My\U0010accountVC+Ext.swift"; sourceTree = "<group>"; };
 		4681780824DBFD63004E7490 /* MainHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHeaderView.swift; sourceTree = "<group>"; };
 		4681780C24DC184B004E7490 /* CarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarCell.swift; sourceTree = "<group>"; };
+		468252D124E29C5200BA62C3 /* Appointment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appointment.swift; sourceTree = "<group>"; };
 		46EE283424D17C9F00836C63 /* ForgotPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordVC.swift; sourceTree = "<group>"; };
 		46EE283624D18F6600836C63 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		518BEB14FE31E644833FBAB7 /* Pods_Car_Service_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Car_Service_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -292,6 +294,7 @@
 			children = (
 				46645C6124D193180099717A /* User.swift */,
 				464CD3A524DAEBE8000601E8 /* Car.swift */,
+				468252D124E29C5200BA62C3 /* Appointment.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -501,6 +504,7 @@
 				4653BC2124CEC9E0009C2F6A /* RegisterVC.swift in Sources */,
 				466CF02524E1760F00B533B3 /* SetAppointmentVC.swift in Sources */,
 				4655EB1624D2C0410060DEC7 /* UIViewController+Ext.swift in Sources */,
+				468252D224E29C5200BA62C3 /* Appointment.swift in Sources */,
 				4655EB1424D2BDEE0060DEC7 /* CSALoadingVC.swift in Sources */,
 				46007BAE24CEF57900A02F3C /* CSAAuthButton.swift in Sources */,
 				46007BB024CEF82100A02F3C /* CSATextButton.swift in Sources */,

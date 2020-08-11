@@ -14,6 +14,7 @@ struct User {
     var email: String
     var password: String
     var cars: [String] = []
+    var appointments: [String] = []
     
     init(name: String, email: String, password: String, uid: String? = nil) {
         self.name = name
@@ -27,6 +28,7 @@ struct User {
         self.name = dictionary["name"] as? String ?? ""
         self.email = dictionary["email"] as? String ?? ""
         self.cars = dictionary["cars"] as? [String] ?? []
+        self.appointments = dictionary["appointments"] as? [String] ?? []
         self.password = password ?? ""
     }
 }

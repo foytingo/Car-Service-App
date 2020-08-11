@@ -169,8 +169,8 @@ class AddCarVC: CSALoadingVC{
         guard let color = color else { return }
         guard let plateNumber = plateNumber else { return }
         guard let currentKm = currentKm else { return }
-   
-        let newCar = Car(uid: UUID(), brand: brand, year: year, model: model, color: color, plateNumber: plateNumber, currentKm: currentKm)
+        guard let owner = uid else { return }
+        let newCar = Car(owner: owner, uid: UUID(), brand: brand, year: year, model: model, color: color, plateNumber: plateNumber, currentKm: currentKm)
        
         guard let uid = uid else { return }
         

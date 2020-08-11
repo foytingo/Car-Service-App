@@ -59,4 +59,17 @@ struct FirestoreManager {
         }
     }
     
+    static func createAppointment(appointment: Appointment, completed: @escaping(Result<String, Error>) -> Void) {
+        
+        let values = ["uid": appointment.uid.uuidString, "owner": appointment.car.owner, "car": appointment.car.uid.uuidString, "number": appointment.phoneNumber, "date": appointment.date]
+        
+        Firestore.firestore().collection("appointments").document(appointment.uid.uuidString).setData(values) { (error) in
+            if let error = error {
+                completed(.failure(error))
+            }
+            Firestore.firestore().collection("users").document(appointment.car.owner).updateData(["apppointment": FieldValue.arrayUnion([appointment.uid.uuidString])])
+        }
+        completed(.success("success"))
+    }
+ 
 }

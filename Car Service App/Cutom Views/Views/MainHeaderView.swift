@@ -96,17 +96,9 @@ class MainHeaderView: UIView {
         mainHeaderViewDelegate.didTapSettingsButton()
     }
   
-    func set(user: User, verifyStatus: Bool?) {
+    func set(user: User) {
         nameLabel.text = user.name
-        
-        if verifyStatus == true {
-            emailLabel.textColor = .white
-            emailLabel.text = user.email
-        } else {
-            emailLabel.textColor = .red
-            emailLabel.text = "\(user.email) - Need verify(check emails)"
-        }
-        
+        emailLabel.text = user.email
     }
 
 }

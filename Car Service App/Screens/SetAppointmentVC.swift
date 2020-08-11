@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SetAppointmentVC: UIViewController {
+class SetAppointmentVC: CSALoadingVC {
     
     let titleLabel = CSATitleLabel()
     let carLabel = CSASecondTitleLabel()
@@ -104,9 +104,23 @@ class SetAppointmentVC: UIViewController {
         dateTextFieldView.donePressed()
         guard let number = phoneNumberTextFieldView.textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
         guard let date = dateTextFieldView.textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
+        guard let car = car else { return }
         
-        print("\(car!) - \(number) - \(date)")
-       }
+        let newAppointment = Appointment(uid: UUID(), car: car, phoneNumber: number, date: date)
+        
+        showLoadingView()
+        FirestoreManager.createAppointment(appointment: newAppointment) { [weak self] result in
+            guard let self = self else { return }
+            self.dismissLoadingView()
+            switch result {
+            case .success(let string):
+                print(string)
+                self.navigationController?.popViewController(animated: true)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
     
     func configureCancelButton() {
         view.addSubview(cancelButton)
