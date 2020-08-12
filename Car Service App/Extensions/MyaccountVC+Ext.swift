@@ -42,7 +42,7 @@ extension MyAccountVC: CarCellDelegate {
         let showAppointment = UIAlertAction(title: "Show Appointments", style: .default) { [weak self] action in
             guard let self = self else { return }
             let destVC = ShowAppointmentsVC()
-            destVC.car = car
+            destVC.carUid = car.uid.uuidString
             self.navigationController?.pushViewController(destVC, animated: true)
         }
         

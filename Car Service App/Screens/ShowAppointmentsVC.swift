@@ -10,10 +10,21 @@ import UIKit
 
 class ShowAppointmentsVC: CSALoadingVC {
     
-    var car: Car?
+    var carUid: String?
+    
+    var car: Car? {
+        didSet {
+            guard let car = car else { return }
+            print("didSet car")
+            headerView.set(title: car.plateNumber.uppercased(), detail: "\(car.brand) - \(car.year) - \(car.model)")
+            fetchAppointment(with: car)
+        }
+    }
     
     var appointments = [Appointment]() {
         didSet {
+            print("appoitnemnt didset")
+            
             DispatchQueue.main.async {
                 self.appointmentTableView.reloadData()
             }
@@ -46,10 +57,16 @@ class ShowAppointmentsVC: CSALoadingVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
+        self.appointments.removeAll()
+        showLoadingView()
         
-        guard let car = car else { return }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        guard let carUid = carUid else { return }
         DispatchQueue.global(qos: .userInitiated).async {
-            self.fetchAppointment(with: car)
+            self.fetchCar(with: carUid)
         }
     }
     
@@ -71,9 +88,7 @@ class ShowAppointmentsVC: CSALoadingVC {
     
     func configureHeaderView() {
         view.addSubview(headerView)
-        
-        guard let car = car else { return }
-        headerView.set(title: car.plateNumber.uppercased(), detail: "\(car.brand) - \(car.year) - \(car.model)")
+ 
         headerView.settingsButton.isHidden = true
         
         NSLayoutConstraint.activate([
@@ -106,7 +121,7 @@ class ShowAppointmentsVC: CSALoadingVC {
     
     @objc func handleAddNewButton() {
         let destVC = SetAppointmentVC()
-        destVC.car = car!
+        destVC.car = car
         navigationController?.pushViewController(destVC, animated: true)
     }
     
@@ -130,12 +145,28 @@ class ShowAppointmentsVC: CSALoadingVC {
         ])
     }
     
+    private func fetchCar(with uid: String) {
+        print("fetch car")
+        
+        FirestoreManager.fetchCar(uid: uid) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+                
+            case .success(let car):
+                self.car = car
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
     private func fetchAppointment(with car: Car) {
-        appointments.removeAll()
-        showLoadingView()
         if car.appointments.count == 0 {
+            print("zero appoitnemtn")
             self.dismissLoadingView()
         } else {
+            print("non zero appointment")
             for appointment in car.appointments {
                 FirestoreManager.fetcAppointments(uid: appointment, car: car) { [weak self] result in
                     guard let self = self else { return }

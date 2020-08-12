@@ -15,6 +15,7 @@ class MyAccountVC: CSALoadingVC {
     
     var cars = [Car]() {
         didSet {
+            print("cars didset")
             DispatchQueue.main.async {
                 self.carsTableView.reloadData()
             }
@@ -39,13 +40,20 @@ class MyAccountVC: CSALoadingVC {
     }
     
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
         guard let user = user else { return }
         DispatchQueue.global(qos: .userInitiated).async {
-            self.cars.removeAll()
             self.fetchUser(with: user.uid)
         }
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.cars.removeAll()
+        showLoadingView()
     }
     
     
@@ -106,9 +114,10 @@ class MyAccountVC: CSALoadingVC {
         let destVC = AddCarVC()
         destVC.uid = user?.uid
         destVC.isComingInApp = true
-        let navController = UINavigationController(rootViewController: destVC)
-        navController.modalPresentationStyle = .fullScreen
-        present(navController, animated: true)
+        self.navigationController?.pushViewController(destVC, animated: true)
+//        let navController = UINavigationController(rootViewController: destVC)
+//        navController.modalPresentationStyle = .fullScreen
+//        present(navController, animated: true)
     }
     
     
@@ -133,7 +142,8 @@ class MyAccountVC: CSALoadingVC {
     
     
     private func fetchUser(with uid: String) {
-        showLoadingView()
+        print("fetchuser")
+        
         FirestoreManager.fetchUser(uid: uid) { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -148,9 +158,12 @@ class MyAccountVC: CSALoadingVC {
     
     
     private func fetchUsersCars(with user: User) {
+        
         if user.cars.count == 0 {
+            print("fetchcarzero")
             self.dismissLoadingView()
         } else {
+            print("fetchcarnonzero")
             for car in user.cars {
                 FirestoreManager.fetchCar(uid: car) { [weak self] result in
                     guard let self = self else { return }

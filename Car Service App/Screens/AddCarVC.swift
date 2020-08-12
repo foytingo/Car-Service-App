@@ -183,7 +183,7 @@ class AddCarVC: CSALoadingVC{
                 if self.isComingInApp == false {
                     self.presentMainVC(with: uid)
                 } else {
-                    self.dismiss(animated: true)
+                    self.navigationController?.popViewController(animated: true)
                 }
             case .failure(let error):
                 self.presentAlertWithOk(title: "Error", message: error.localizedDescription)
@@ -214,7 +214,7 @@ class AddCarVC: CSALoadingVC{
     
     @objc func handleAddLaterButton() {
         if isComingInApp {
-            dismiss(animated: true)
+            self.navigationController?.popViewController(animated: true)
         } else {
             let mainVC = MyAccountVC()
             self.navigationController?.pushViewController(mainVC, animated: true)
