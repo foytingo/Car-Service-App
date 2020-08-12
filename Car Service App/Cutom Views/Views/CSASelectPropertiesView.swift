@@ -84,4 +84,8 @@ class CSASelectPropertiesView: UIView {
         ])
     }
     
+    func nonSet() {
+        lineView.backgroundColor = .systemRed
+    }
+    
 }

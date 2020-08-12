@@ -64,6 +64,7 @@ class AddCarVC: CSALoadingVC{
         
     }
     
+    
     func configureView() {
         navigationController?.setNavigationBarHidden(true, animated: true)
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
