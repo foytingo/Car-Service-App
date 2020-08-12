@@ -70,8 +70,21 @@ extension MyAccountVC: CarCellDelegate {
         }
         
         let deleteCar = UIAlertAction(title: "Delete", style: .destructive) { [weak self] action in
-            guard self != nil else { return }
-            print("show delete car alert")
+            guard let self = self else { return }
+            self.presentAlertWithDeleteAction(title: "Are you sure?", message: "If you delete this car, appointments will delete.", handler: { action in
+                self.showLoadingView()
+                FirestoreManager.deleteCar(carUid: car.uid.uuidString) { [weak self] result in
+                    guard let self = self else { return }
+                    self.dismissLoadingView()
+                    switch result {
+                    case .success(let message):
+                        self.cars.remove(at: indexPath.row)
+                        print(message)
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
+                }
+            })
         }
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)

@@ -89,5 +89,53 @@ struct FirestoreManager {
         }
         completed(.success("success"))
     }
+    
+    
+    static func deleteAppointment(appointmentUid: String, completed: @escaping(Result<String,Error>) -> Void) {
+        Firestore.firestore().collection("appointments").document(appointmentUid).delete { error in
+            if let error = error {
+                completed(.failure(error))
+            }
+            completed(.success("\(appointmentUid) was successfullt deleted."))
+        }
+    }
  
+    
+    static func deleteCar(carUid: String, completed: @escaping(Result<String,Error>) -> Void) {
+        Firestore.firestore().collection("cars").document(carUid).getDocument { (snapshot, error) in
+            
+            if let error = error {
+                completed(.failure(error))
+            }
+            
+            guard let dictionary = snapshot?.data() else { return }
+            
+            let car = Car(uid: UUID(uuidString: carUid)!, dictionary: dictionary)
+            
+            for appointment in car.appointments {
+                Firestore.firestore().collection("appointments").document(appointment).delete { error in
+                    if let error = error {
+                        completed(.failure(error))
+                    }
+                }
+            }
+            
+            Firestore.firestore().collection("cars").document(carUid).delete { (error) in
+                if let error = error {
+                    completed(.failure(error))
+                }
+            }
+            
+            Firestore.firestore().collection("users").document(car.owner).updateData(["cars": FieldValue.arrayRemove([carUid]), "appointment": FieldValue.arrayRemove(car.appointments)]) { error in
+                if let error = error {
+                    completed(.failure(error))
+                }
+            }
+            
+            completed(.success("Cars and appointment successfully deleted."))
+        }
+        
+    }
+    
+    
 }

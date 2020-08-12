@@ -23,6 +23,13 @@ extension UIViewController {
         present(ac, animated: true)
     }
     
+    func presentAlertWithDeleteAction(title: String, message: String, handler: ((UIAlertAction) -> Void)?) {
+        let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: handler))
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(ac, animated: true)
+    }
+    
     func presentAlertWithTextField(title: String, message: String, placeholder: String, completion:((String) -> Void)?) {
         let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
         

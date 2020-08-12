@@ -148,15 +148,19 @@ class MyAccountVC: CSALoadingVC {
     
     
     private func fetchUsersCars(with user: User) {
-        for car in user.cars {
-            FirestoreManager.fetchCar(uid: car) { [weak self] result in
-                guard let self = self else { return }
-                self.dismissLoadingView()
-                switch result {
-                case .success(let car):
-                    self.cars.append(car)
-                case .failure(let error):
-                    print(error)
+        if user.cars.count == 0 {
+            self.dismissLoadingView()
+        } else {
+            for car in user.cars {
+                FirestoreManager.fetchCar(uid: car) { [weak self] result in
+                    guard let self = self else { return }
+                    self.dismissLoadingView()
+                    switch result {
+                    case .success(let car):
+                        self.cars.append(car)
+                    case .failure(let error):
+                        print(error)
+                    }
                 }
             }
         }

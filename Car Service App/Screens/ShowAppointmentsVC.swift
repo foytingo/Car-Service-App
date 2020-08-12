@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ShowAppointmentsVC: UIViewController {
+class ShowAppointmentsVC: CSALoadingVC {
 
     var car: Car?
  
@@ -131,9 +131,12 @@ class ShowAppointmentsVC: UIViewController {
     }
     
     private func fetchAppointment(with car: Car) {
+        appointments.removeAll()
+        showLoadingView()
         for appointment in car.appointments {
             FirestoreManager.fetcAppointments(uid: appointment, car: car) { [weak self] result in
                 guard let self = self else { return }
+                self.dismissLoadingView()
                 switch result {
                 case .success(let appointment):
                     self.appointments.append(appointment)
