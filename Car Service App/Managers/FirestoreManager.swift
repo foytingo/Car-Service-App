@@ -46,7 +46,7 @@ struct FirestoreManager {
             completed(.success(appointment))
         }
     }
-        
+    
     
     static func uploadCar(userUid: String, car carData: Car, completed: @escaping(Result<String, Error>) -> Void) {
         
@@ -92,14 +92,38 @@ struct FirestoreManager {
     
     
     static func deleteAppointment(appointmentUid: String, completed: @escaping(Result<String,Error>) -> Void) {
-        Firestore.firestore().collection("appointments").document(appointmentUid).delete { error in
+        Firestore.firestore().collection("appointments").document(appointmentUid).getDocument { (snapshot, error) in
             if let error = error {
                 completed(.failure(error))
             }
-            completed(.success("\(appointmentUid) was successfullt deleted."))
+            
+            guard let dictionary = snapshot?.data() else { return }
+            
+            let appointment = Appointment(uid: UUID(uuidString: appointmentUid)!, dictionary: dictionary)
+            
+            Firestore.firestore().collection("appointments").document(appointmentUid).delete { error in
+                if let error = error {
+                    completed(.failure(error))
+                }
+            }
+            
+            Firestore.firestore().collection("cars").document(appointment.car).updateData(["appointment": FieldValue.arrayRemove([appointmentUid])]) { error in
+                if let error = error {
+                    completed(.failure(error))
+                }
+            }
+            
+            Firestore.firestore().collection("users").document(appointment.carOwner).updateData(["appointment": FieldValue.arrayRemove([appointmentUid])]) { error in
+                if let error = error {
+                    completed(.failure(error))
+                }
+            }
+            
+            completed(.success("Appointment successfully deleted."))
         }
+        
     }
- 
+    
     
     static func deleteCar(carUid: String, completed: @escaping(Result<String,Error>) -> Void) {
         Firestore.firestore().collection("cars").document(carUid).getDocument { (snapshot, error) in

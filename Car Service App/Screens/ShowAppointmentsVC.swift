@@ -9,9 +9,9 @@
 import UIKit
 
 class ShowAppointmentsVC: CSALoadingVC {
-
+    
     var car: Car?
- 
+    
     var appointments = [Appointment]() {
         didSet {
             DispatchQueue.main.async {
@@ -133,20 +133,23 @@ class ShowAppointmentsVC: CSALoadingVC {
     private func fetchAppointment(with car: Car) {
         appointments.removeAll()
         showLoadingView()
-        for appointment in car.appointments {
-            FirestoreManager.fetcAppointments(uid: appointment, car: car) { [weak self] result in
-                guard let self = self else { return }
-                self.dismissLoadingView()
-                switch result {
-                case .success(let appointment):
-                    self.appointments.append(appointment)
-                case .failure(let error):
-                    print(error.localizedDescription)
+        if car.appointments.count == 0 {
+            self.dismissLoadingView()
+        } else {
+            for appointment in car.appointments {
+                FirestoreManager.fetcAppointments(uid: appointment, car: car) { [weak self] result in
+                    guard let self = self else { return }
+                    self.dismissLoadingView()
+                    switch result {
+                    case .success(let appointment):
+                        self.appointments.append(appointment)
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
                 }
             }
         }
     }
-
 }
 
 extension ShowAppointmentsVC: UITableViewDelegate, UITableViewDataSource {
@@ -164,7 +167,22 @@ extension ShowAppointmentsVC: UITableViewDelegate, UITableViewDataSource {
 
 extension ShowAppointmentsVC: AppointmentCellDelegate {
     func didTapActionButton(_ cell: AppointmentCell) {
-        print("delete")
+        guard let appointment = cell.appointment else { return }
+        guard let indexPath = appointmentTableView.indexPath(for: cell) else { return }
+        presentAlertWithDeleteAction(title: "Are you sure", message: "") { action in
+            self.showLoadingView()
+            FirestoreManager.deleteAppointment(appointmentUid: appointment.uid.uuidString) { [weak self] result in
+                guard let self = self else { return }
+                self.dismissLoadingView()
+                switch result {
+                case .success(let message):
+                    self.appointments.remove(at: indexPath.row)
+                    print(message)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        }
     }
     
     
