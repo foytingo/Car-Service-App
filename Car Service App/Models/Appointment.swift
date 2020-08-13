@@ -9,12 +9,14 @@
 import Foundation
 
 struct Appointment {
+    
     var uid: UUID
     var car: String
     var carOwner: String
     var phoneNumber: String
     var date: String
 
+    
     init (uid: UUID, car: String, carOwner: String, phoneNumber: String, date: String) {
         self.uid = uid
         self.car = car
@@ -28,7 +30,7 @@ struct Appointment {
         self.uid = uid
         self.car = dictionary["car"] as? String ?? ""
         self.carOwner = dictionary["carOwner"] as? String ?? ""
-        self.phoneNumber = dictionary["phoneNumber"] as? String ?? ""
+        self.phoneNumber = dictionary["number"] as? String ?? ""
         self.date = dictionary["date"] as? String ?? ""
     }
     

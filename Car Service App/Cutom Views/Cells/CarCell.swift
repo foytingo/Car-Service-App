@@ -29,15 +29,17 @@ class CarCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        backgroundColor = .clear
+        
         configureBackView()
         configureCarId()
         configureCarKm()
         configureCarDetail()
         configureStackView()
         configureActionButton()
-        backgroundColor = .clear
-        
     }
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -46,6 +48,7 @@ class CarCell: UITableViewCell {
     
     private func configureBackView() {
         addSubview(backView)
+        
         backView.translatesAutoresizingMaskIntoConstraints = false
         backView.layer.cornerRadius = 10
         backView.backgroundColor = Colors.backgroundBlue2
@@ -58,24 +61,27 @@ class CarCell: UITableViewCell {
         ])
     }
     
+    
     private func configureCarId() {
         carID.translatesAutoresizingMaskIntoConstraints = false
         carID.textColor = .white
         carID.font = UIFont.systemFont(ofSize: 18, weight: .bold)
     }
     
+    
     private func configureCarKm() {
         carKm.translatesAutoresizingMaskIntoConstraints = false
         carKm.textColor = .white
         carKm.font = UIFont.systemFont(ofSize: 18, weight: .medium)
-        
     }
+    
     
     private func configureCarDetail() {
         carDetail.translatesAutoresizingMaskIntoConstraints = false
         carDetail.textColor = .white
         carKm.font = UIFont.systemFont(ofSize: 14, weight: .medium)
     }
+    
     
     private func configureStackView() {
         backView.addSubview(stackView)
@@ -91,9 +97,9 @@ class CarCell: UITableViewCell {
         NSLayoutConstraint.activate([
             stackView.centerYAnchor.constraint(equalTo: backView.centerYAnchor),
             stackView.leadingAnchor.constraint(equalTo: backView.leadingAnchor, constant: 20),
-            
         ])
     }
+    
     
     func configureActionButton() {
         backView.addSubview(actionButton)
@@ -115,9 +121,9 @@ class CarCell: UITableViewCell {
             actionButton.trailingAnchor.constraint(equalTo: backView.trailingAnchor, constant: -20),
             actionButton.bottomAnchor.constraint(equalTo: backView.bottomAnchor, constant: -10),
             actionButton.widthAnchor.constraint(equalToConstant: 70)
-            
         ])
     }
+    
     
     @objc func handleActionButton() {
         carCellDelegate.didTapActionButton(self)
@@ -130,4 +136,5 @@ class CarCell: UITableViewCell {
         carDetail.text = "\(car.brand) - \(car.year) - \(car.model)"
         carKm.text = "Current Kilometer: \(car.currentKm)"
     }
+    
 }

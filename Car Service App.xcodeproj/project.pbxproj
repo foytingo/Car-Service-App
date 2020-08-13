@@ -37,6 +37,7 @@
 		466CF02524E1760F00B533B3 /* SetAppointmentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466CF02424E1760F00B533B3 /* SetAppointmentVC.swift */; };
 		466CF02724E17D3A00B533B3 /* CSASecondTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466CF02624E17D3A00B533B3 /* CSASecondTitleLabel.swift */; };
 		467B82AE24DEAA2800B23572 /* MyaccountVC+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467B82AD24DEAA2800B23572 /* MyaccountVC+Ext.swift */; };
+		467D4EDE24E41BFA0000ECF4 /* CSALineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467D4EDD24E41BFA0000ECF4 /* CSALineView.swift */; };
 		4681780924DBFD63004E7490 /* MainHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4681780824DBFD63004E7490 /* MainHeaderView.swift */; };
 		4681780D24DC184B004E7490 /* CarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4681780C24DC184B004E7490 /* CarCell.swift */; };
 		468252D224E29C5200BA62C3 /* Appointment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468252D124E29C5200BA62C3 /* Appointment.swift */; };
@@ -96,6 +97,7 @@
 		466CF02424E1760F00B533B3 /* SetAppointmentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAppointmentVC.swift; sourceTree = "<group>"; };
 		466CF02624E17D3A00B533B3 /* CSASecondTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSASecondTitleLabel.swift; sourceTree = "<group>"; };
 		467B82AD24DEAA2800B23572 /* MyaccountVC+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "My\U0010accountVC+Ext.swift"; sourceTree = "<group>"; };
+		467D4EDD24E41BFA0000ECF4 /* CSALineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSALineView.swift; sourceTree = "<group>"; };
 		4681780824DBFD63004E7490 /* MainHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHeaderView.swift; sourceTree = "<group>"; };
 		4681780C24DC184B004E7490 /* CarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarCell.swift; sourceTree = "<group>"; };
 		468252D124E29C5200BA62C3 /* Appointment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appointment.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 				46007B9E24CED7B000A02F3C /* CSATextFieldView.swift */,
 				464CD39624DAA070000601E8 /* CSASelectPropertiesView.swift */,
 				4681780824DBFD63004E7490 /* MainHeaderView.swift */,
+				467D4EDD24E41BFA0000ECF4 /* CSALineView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -493,6 +496,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				467D4EDE24E41BFA0000ECF4 /* CSALineView.swift in Sources */,
 				46645C6224D193180099717A /* User.swift in Sources */,
 				46645C6424D195B20099717A /* AuthManager.swift in Sources */,
 				464CD39D24DAB01C000601E8 /* ModelListVC.swift in Sources */,

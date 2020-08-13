@@ -36,12 +36,24 @@ class ModelListVC: UITableViewController {
     }
     
     var modelYear: String?
-
+    
     weak var selectModelDelegate: SelectModelDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureView()
+        configureTableView()
+        
+    }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    
+    private func configureView() {
         navigationController?.setNavigationBarHidden(false, animated: true)
         navigationController?.navigationBar.barTintColor = Colors.softBlue
         navigationController?.navigationBar.tintColor = Colors.darkBlue
@@ -50,22 +62,22 @@ class ModelListVC: UITableViewController {
         
         view.backgroundColor = Colors.darkBlue
         title = "Select Car Model"
+    }
+    
+    
+    private func configureTableView() {
         tableView.separatorColor = Colors.softBlue
         tableView.separatorInset = .init(top: 0, left: 10, bottom: 0, right: 10)
         tableView.tableFooterView = UIView()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "ModelCell")
     }
-
-    override func viewWillDisappear(_ animated: Bool) {
-           navigationController?.setNavigationBarHidden(true, animated: true)
-       }
     
-    // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let count = modelArray?.count else { return 0 }
         return count
     }
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ModelCell", for: indexPath)
@@ -76,11 +88,11 @@ class ModelListVC: UITableViewController {
         return cell
     }
     
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let model = modelArray?[indexPath.row] else { return }
         selectModelDelegate?.didSelectModel(selectedModel: model)
         navigationController?.popViewController(animated: true)
-
     }
-   
+    
 }

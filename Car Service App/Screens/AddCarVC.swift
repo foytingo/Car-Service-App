@@ -47,9 +47,10 @@ class AddCarVC: CSALoadingVC{
     var currentKm: String? {
         didSet { currentKmView.detailLabel.text = currentKm }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         configureView()
         configureTitleLabel()
         configureBrandSelectView()
@@ -58,10 +59,8 @@ class AddCarVC: CSALoadingVC{
         configureColorSelectView()
         configureLicenseSelectView()
         configureCurrentKmView()
-        
         configureDoneButton()
         configureAddLaterButton()
-        
     }
     
     
@@ -71,6 +70,7 @@ class AddCarVC: CSALoadingVC{
         view.backgroundColor = Colors.darkBlue
         view.isUserInteractionEnabled = true
     }
+    
     
     func configureTitleLabel() {
         view.addSubview(titleLabel)
@@ -83,9 +83,12 @@ class AddCarVC: CSALoadingVC{
         ])
     }
     
+    
     func configureBrandSelectView() {
         view.addSubview(brandSelectView)
+        
         addTapGesture(view: brandSelectView)
+        
         NSLayoutConstraint.activate([
             brandSelectView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
             brandSelectView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -94,9 +97,12 @@ class AddCarVC: CSALoadingVC{
         ])
     }
     
+    
     func configureyearSelectView() {
         view.addSubview(yearSelectView)
+        
         addTapGesture(view: yearSelectView)
+        
         NSLayoutConstraint.activate([
             yearSelectView.topAnchor.constraint(equalTo: brandSelectView.bottomAnchor, constant: 10),
             yearSelectView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -105,9 +111,12 @@ class AddCarVC: CSALoadingVC{
         ])
     }
     
+    
     func configureModelSelectView() {
         view.addSubview(modelSelectView)
+        
         addTapGesture(view: modelSelectView)
+        
         NSLayoutConstraint.activate([
             modelSelectView.topAnchor.constraint(equalTo: yearSelectView.bottomAnchor, constant: 10),
             modelSelectView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -116,9 +125,12 @@ class AddCarVC: CSALoadingVC{
         ])
     }
     
+    
     func configureColorSelectView() {
         view.addSubview(colorSelectView)
+        
         addTapGesture(view: colorSelectView)
+        
         NSLayoutConstraint.activate([
             colorSelectView.topAnchor.constraint(equalTo: modelSelectView.bottomAnchor, constant: 10),
             colorSelectView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -127,9 +139,12 @@ class AddCarVC: CSALoadingVC{
         ])
     }
     
+    
     func configureLicenseSelectView() {
         view.addSubview(licenseSelectView)
+        
         addTapGesture(view: licenseSelectView)
+        
         NSLayoutConstraint.activate([
             licenseSelectView.topAnchor.constraint(equalTo: colorSelectView.bottomAnchor, constant: 10),
             licenseSelectView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -138,9 +153,12 @@ class AddCarVC: CSALoadingVC{
         ])
     }
     
+    
     func configureCurrentKmView() {
         view.addSubview(currentKmView)
+        
         addTapGesture(view: currentKmView)
+        
         NSLayoutConstraint.activate([
             currentKmView.topAnchor.constraint(equalTo: licenseSelectView.bottomAnchor, constant: 10),
             currentKmView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -163,6 +181,7 @@ class AddCarVC: CSALoadingVC{
         ])
     }
     
+    
     @objc func doneButtonHandler() {
         guard let brand = brand else { return }
         guard let year = year else { return }
@@ -171,8 +190,9 @@ class AddCarVC: CSALoadingVC{
         guard let plateNumber = plateNumber else { return }
         guard let currentKm = currentKm else { return }
         guard let owner = uid else { return }
+        
         let newCar = Car(owner: owner, uid: UUID(), brand: brand, year: year, model: model, color: color, plateNumber: plateNumber, currentKm: currentKm)
-       
+        
         guard let uid = uid else { return }
         
         showLoadingView()
@@ -180,9 +200,9 @@ class AddCarVC: CSALoadingVC{
             guard let self = self else { return }
             self.dismissLoadingView()
             switch result {
-            case .success(let uid):
+            case .success(_):
                 if self.isComingInApp == false {
-                    self.presentMainVC(with: uid)
+                    self.presentMainVC()
                 } else {
                     self.navigationController?.popViewController(animated: true)
                 }
@@ -193,9 +213,8 @@ class AddCarVC: CSALoadingVC{
     }
     
     
-    func presentMainVC(with uid: String) {
+    func presentMainVC() {
         let mainVC = MyAccountVC()
-        //mainVC.uid = uid
         self.navigationController?.pushViewController(mainVC, animated: true)
     }
     
@@ -212,6 +231,7 @@ class AddCarVC: CSALoadingVC{
             addLaterButton.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
+    
     
     @objc func handleAddLaterButton() {
         if isComingInApp {
@@ -232,46 +252,51 @@ class AddCarVC: CSALoadingVC{
     
     @objc func handleTap(sender: UIGestureRecognizer) {
         if let view = sender.view as? CSASelectPropertiesView{
+            
             switch view.tag {
             case 0:
                 let destVC = BrandListVC()
                 destVC.selectBrandDelegate = self
                 navigationController?.pushViewController(destVC, animated: true)
+                
             case 1:
                 let destVC = YearListVC()
                 guard brand != nil else {
-                    print("select brand first")
+                    self.presentAlertWithOk(title: "Error", message: "Select brand first.")
                     return
                 }
                 destVC.selectYearDelegate = self
                 navigationController?.pushViewController(destVC, animated: true)
+                
             case 2:
                 let destVC = ModelListVC()
                 guard brand != nil else {
-                    print("select brand first")
+                    self.presentAlertWithOk(title: "Error", message: "Select brand first.")
                     return
                 }
                 destVC.brand = brand
                 destVC.selectModelDelegate = self
                 navigationController?.pushViewController(destVC, animated: true)
+                
             case 3:
                 let destVC = ColorListVC()
                 destVC.selectColorDelegate = self
                 navigationController?.pushViewController(destVC, animated: true)
+                
             case 4:
                 presentAlertWithTextField(title: "License Plate Number", message: "", placeholder: "Enter licence plate number.") { [weak self] text in
                     guard let self = self else { return }
                     self.plateNumber = text
-                    
                 }
+                
             case 5:
                 presentAlertWithTextField(title: "Current Kilometer", message: "", placeholder: "Enter current km your car.") { [weak self] text in
                     guard let self = self else { return }
                     self.currentKm = text
-            
                 }
+                
             default:
-                print("err")
+                self.presentAlertWithOk(title: "Error", message: "Error")
             }
             
         }
@@ -279,18 +304,20 @@ class AddCarVC: CSALoadingVC{
     
 }
 
+
 extension AddCarVC: SelectBrandDelegate {
     func didSelectBrand(selectedBrand: String) {
         brand = selectedBrand
     }
 }
 
+
 extension AddCarVC: SelectYearDelegate {
     func didSelectYear(selectedYear: String) {
         year = selectedYear
     }
-    
 }
+
 
 extension AddCarVC: SelectModelDelegate {
     func didSelectModel(selectedModel: String) {
@@ -298,15 +325,10 @@ extension AddCarVC: SelectModelDelegate {
     }
 }
 
+
 extension AddCarVC: SelectColorDelegate {
     func didSelectColor(selectedColor: String) {
         color = selectedColor
     }
-    
-
-    
-    
-    
-    
 }
 

@@ -21,8 +21,8 @@ extension MyAccountVC: UITableViewDelegate, UITableViewDataSource {
         cell.carCellDelegate = self
         return cell
     }
-    
 }
+
 
 extension MyAccountVC: CarCellDelegate {
     
@@ -96,15 +96,11 @@ extension MyAccountVC: CarCellDelegate {
         ac.addAction(cancelAction)
         
         self.present(ac, animated: true, completion: nil)
-        
     }
-    
     
 }
 
-
 extension MyAccountVC: MainHeaderViewDelegate {
-    
     func didTapSettingsButton() {
         presentActionSheetUserSettings(title: "Settings", message: "Select Action")
     }

@@ -9,6 +9,7 @@
 import Foundation
 
 struct Car {
+    
     var owner: String
     var uid: UUID
     var brand: String
@@ -18,6 +19,7 @@ struct Car {
     var plateNumber: String
     var currentKm: String
     var appointments: [String] = []
+    
     
     init (owner: String, uid: UUID, brand: String, year: String, model: String, color: String, plateNumber: String, currentKm: String) {
         self.owner = owner
@@ -30,6 +32,7 @@ struct Car {
         self.currentKm = currentKm
     }
     
+    
     init (uid: UUID, dictionary: [String: Any]) {
         self.uid = uid
         self.brand = dictionary["brand"] as? String ?? ""
@@ -41,4 +44,6 @@ struct Car {
         self.owner = dictionary["owner"] as? String ?? ""
         self.appointments = dictionary["appointment"] as? [String] ?? []
     }
+    
+    
 }

@@ -15,30 +15,27 @@ class ShowAppointmentsVC: CSALoadingVC {
     var car: Car? {
         didSet {
             guard let car = car else { return }
-            print("didSet car")
             headerView.set(title: car.plateNumber.uppercased(), detail: "\(car.brand) - \(car.year) - \(car.model)")
             fetchAppointment(with: car)
         }
     }
     
+    
     var appointments = [Appointment]() {
         didSet {
-            print("appoitnemnt didset")
-            
             DispatchQueue.main.async {
                 self.appointmentTableView.reloadData()
             }
         }
     }
     
+    
     let headerTitleLabel = CSATitleLabel()
     let headerView = MainHeaderView()
-    
     let appointmentTitleLabel = CSATitleLabel()
     let addAppointmentButton = CSATextButton(title: "Add new", color: Colors.softBlue)
     let appointmentTableViewTitleStackView = UIStackView()
     let appointmentTableView = UITableView()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,26 +46,32 @@ class ShowAppointmentsVC: CSALoadingVC {
         configureAppointmentTableView()
     }
     
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         navigationController?.setNavigationBarHidden(false, animated: true)
         self.appointments.removeAll()
         showLoadingView()
-        
     }
+    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
         guard let carUid = carUid else { return }
         DispatchQueue.global(qos: .userInitiated).async {
             self.fetchCar(with: carUid)
         }
     }
+    
     
     func configureView() {
         view.backgroundColor = Colors.darkBlue
@@ -86,6 +89,7 @@ class ShowAppointmentsVC: CSALoadingVC {
         ])
     }
     
+    
     func configureHeaderView() {
         view.addSubview(headerView)
  
@@ -98,6 +102,7 @@ class ShowAppointmentsVC: CSALoadingVC {
             headerView.heightAnchor.constraint(equalToConstant: 80)
         ])
     }
+    
     
     func configureCarTableViewTitleStackView() {
         view.addSubview(appointmentTableViewTitleStackView)
@@ -119,6 +124,7 @@ class ShowAppointmentsVC: CSALoadingVC {
         ])
     }
     
+    
     @objc func handleAddNewButton() {
         let destVC = SetAppointmentVC()
         destVC.car = car
@@ -128,6 +134,7 @@ class ShowAppointmentsVC: CSALoadingVC {
     
     func configureAppointmentTableView() {
         view.addSubview(appointmentTableView)
+        
         appointmentTableView.rowHeight = 100
         appointmentTableView.separatorStyle = .none
         appointmentTableView.allowsSelection = false
@@ -145,9 +152,8 @@ class ShowAppointmentsVC: CSALoadingVC {
         ])
     }
     
+    
     private func fetchCar(with uid: String) {
-        print("fetch car")
-        
         FirestoreManager.fetchCar(uid: uid) { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -161,12 +167,11 @@ class ShowAppointmentsVC: CSALoadingVC {
         }
     }
     
+    
     private func fetchAppointment(with car: Car) {
         if car.appointments.count == 0 {
-            print("zero appoitnemtn")
             self.dismissLoadingView()
         } else {
-            print("non zero appointment")
             for appointment in car.appointments {
                 FirestoreManager.fetcAppointments(uid: appointment, car: car) { [weak self] result in
                     guard let self = self else { return }
@@ -183,10 +188,12 @@ class ShowAppointmentsVC: CSALoadingVC {
     }
 }
 
+
 extension ShowAppointmentsVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return appointments.count
     }
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: AppointmentCell.reuseID, for: indexPath) as! AppointmentCell
@@ -194,6 +201,7 @@ extension ShowAppointmentsVC: UITableViewDelegate, UITableViewDataSource {
         cell.appointmentCellDelegate = self
         return cell
     }
+    
 }
 
 extension ShowAppointmentsVC: AppointmentCellDelegate {
@@ -206,15 +214,13 @@ extension ShowAppointmentsVC: AppointmentCellDelegate {
                 guard let self = self else { return }
                 self.dismissLoadingView()
                 switch result {
-                case .success(let message):
+                case .success(_):
                     self.appointments.remove(at: indexPath.row)
-                    print(message)
                 case .failure(let error):
-                    print(error.localizedDescription)
+                    self.presentAlertWithOk(title: "Error", message: error.localizedDescription)
                 }
             }
         }
     }
-    
     
 }

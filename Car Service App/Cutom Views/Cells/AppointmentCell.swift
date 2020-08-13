@@ -22,27 +22,33 @@ class AppointmentCell: UITableViewCell {
     let actionButton = UIButton()
     
     var appointment: Appointment?
+    
     static let reuseID = "AppointmentCell"
     
     weak var appointmentCellDelegate: AppointmentCellDelegate!
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        backgroundColor = .clear
+        
         configureBackView()
         configureCarDetail()
         configureDate()
         configurePhoneNumber()
         configureStackView()
         configureActionButton()
-        backgroundColor = .clear
     }
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
     private func configureBackView() {
         addSubview(backView)
+        
         backView.translatesAutoresizingMaskIntoConstraints = false
         backView.layer.cornerRadius = 10
         backView.backgroundColor = Colors.backgroundBlue2
@@ -55,11 +61,13 @@ class AppointmentCell: UITableViewCell {
         ])
     }
     
+    
     private func configurePhoneNumber() {
         phoneNumber.translatesAutoresizingMaskIntoConstraints = false
         phoneNumber.textColor = .white
         phoneNumber.font = UIFont.systemFont(ofSize: 14, weight: .bold)
     }
+    
     
     private func configureCarDetail() {
         carDetail.translatesAutoresizingMaskIntoConstraints = false
@@ -67,11 +75,13 @@ class AppointmentCell: UITableViewCell {
         carDetail.font = UIFont.systemFont(ofSize: 14, weight: .bold)
     }
     
+    
     private func configureDate() {
         date.translatesAutoresizingMaskIntoConstraints = false
         date.textColor = .white
         date.font = UIFont.systemFont(ofSize: 18, weight: .bold)
     }
+    
     
     private func configureStackView() {
         backView.addSubview(stackView)
@@ -87,9 +97,9 @@ class AppointmentCell: UITableViewCell {
         NSLayoutConstraint.activate([
             stackView.centerYAnchor.constraint(equalTo: backView.centerYAnchor),
             stackView.leadingAnchor.constraint(equalTo: backView.leadingAnchor, constant: 20),
-            
         ])
     }
+    
     
     func configureActionButton() {
         backView.addSubview(actionButton)
@@ -111,18 +121,21 @@ class AppointmentCell: UITableViewCell {
             actionButton.trailingAnchor.constraint(equalTo: backView.trailingAnchor, constant: -20),
             actionButton.bottomAnchor.constraint(equalTo: backView.bottomAnchor, constant: -10),
             actionButton.widthAnchor.constraint(equalToConstant: 70)
-            
         ])
     }
+    
     
     @objc func handleActionButton() {
         appointmentCellDelegate.didTapActionButton(self)
     }
     
+    
     func set(appointment: Appointment) {
         self.appointment = appointment
         date.text = appointment.date
-        carDetail.text = "Kilometer: 9999"
+        carDetail.text = appointment.phoneNumber
         phoneNumber.text = appointment.phoneNumber
     }
+    
+    
 }

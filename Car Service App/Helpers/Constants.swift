@@ -16,11 +16,13 @@ enum Colors {
     static let backgroundBlue2 = UIColor(red: 0.16, green: 0.18, blue: 0.33, alpha: 1.00)
 }
 
+
 enum FirestoreCollections {
     static let users = Firestore.firestore().collection("users")
     static let cars = Firestore.firestore().collection("cars")
     static let appointments = Firestore.firestore().collection("appointments")
 }
+
 
 enum Arrays {
     static let carBrands = ["Audi", "Volkswagen", "Seat", "Skoda", "Porsche"]

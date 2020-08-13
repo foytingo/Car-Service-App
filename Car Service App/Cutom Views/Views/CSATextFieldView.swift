@@ -21,7 +21,7 @@ class CSATextFieldView: UIView {
     let textFieldTitle = CSATextFieldTitleLabel()
     let textField = CSATextField()
     let forgotPasswordButton = CSATextButton(title: "Forgot Password", color: .lightGray)
-    let lineView = UIView()
+    let lineView = CSALineView()
     
     var delegate: CSATextFieldViewDelegate?
     
@@ -29,12 +29,14 @@ class CSATextFieldView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         translatesAutoresizingMaskIntoConstraints = false
+        
         configureTextFieldTitle()
         configureTextField()
         configureLineView()
-        
     }
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -51,6 +53,7 @@ class CSATextFieldView: UIView {
         ])
     }
     
+    
     private func configureTextField() {
         addSubview(textField)
         
@@ -62,19 +65,18 @@ class CSATextFieldView: UIView {
         ])
     }
     
+    
     private func configureLineView() {
         addSubview(lineView)
-        
-        lineView.translatesAutoresizingMaskIntoConstraints = false
-        lineView.backgroundColor = .white
-        
+   
         NSLayoutConstraint.activate([
             lineView.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 8),
             lineView.leadingAnchor.constraint(equalTo: textFieldTitle.leadingAnchor),
-            lineView.heightAnchor.constraint(equalToConstant: 1),
-            lineView.widthAnchor.constraint(equalToConstant: 305)
+            lineView.widthAnchor.constraint(equalToConstant: 305),
+            lineView.heightAnchor.constraint(equalToConstant: 1)
         ])
     }
+    
     
     private func configureForgotPasswordButton() {
         addSubview(forgotPasswordButton)
@@ -84,35 +86,32 @@ class CSATextFieldView: UIView {
         NSLayoutConstraint.activate([
             forgotPasswordButton.topAnchor.constraint(equalTo: lineView.bottomAnchor, constant: 8),
             forgotPasswordButton.trailingAnchor.constraint(equalTo: lineView.trailingAnchor),
-            forgotPasswordButton.heightAnchor.constraint(equalToConstant: 27),
-            // forgotPasswordButton.widthAnchor.constraint(equalToConstant: 100)
+            forgotPasswordButton.heightAnchor.constraint(equalToConstant: 27)
         ])
     }
     
+    
     @objc func handleForgotPassword() {
         delegate?.handleForgotPasswordButton()
-        
     }
+    
     
     func checkIsEmpty() {
         if textField.text == "" {
-            setRedColor()
+            setColor(with: .systemRed)
         } else {
-            setNormalColor()
+            setColor(with: .white)
         }
     }
     
-    func setRedColor() {
-        textFieldTitle.textColor = .systemRed
-        lineView.backgroundColor = .systemRed
+    
+    func setColor(with color: UIColor) {
+        textFieldTitle.setColor(with: color)
+        lineView.setColor(with: color)
     }
     
-    func setNormalColor() {
-        textFieldTitle.textColor = .white
-        lineView.backgroundColor = .white
-    }
     
-    func createDatePicker() {
+    private func createDatePicker() {
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         
@@ -125,10 +124,11 @@ class CSATextFieldView: UIView {
         datePicker.datePickerMode = .dateAndTime
     }
     
+    
     @objc func donePressed() {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
-        formatter.timeStyle = .medium
+        formatter.timeStyle = .short
         
         textField.text = formatter.string(from: datePicker.date)
 
@@ -136,8 +136,8 @@ class CSATextFieldView: UIView {
     }
 
     
-    
     func set(textFieldType: TextFieldType, forgotPasswordOn: Bool = false) {
+        
         switch textFieldType {
         case .email:
             textFieldTitle.text = "Email"
@@ -165,4 +165,6 @@ class CSATextFieldView: UIView {
         }
         
     }
+    
+    
 }

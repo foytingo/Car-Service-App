@@ -1,17 +1,18 @@
 //
-//  CSASecondTitleLabel.swift
+//  CSALineView.swift
 //  Car Service App
 //
-//  Created by Murat Baykor on 10.08.2020.
+//  Created by Murat Baykor on 12.08.2020.
 //  Copyright © 2020 Murat Baykor. All rights reserved.
 //
 
 import UIKit
 
-class CSASecondTitleLabel: UILabel {
+class CSALineView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         configure()
     }
     
@@ -23,11 +24,13 @@ class CSASecondTitleLabel: UILabel {
     
     private func configure() {
         translatesAutoresizingMaskIntoConstraints = false
-        
-        textColor = Colors.softBlue
-        textAlignment = .left
-        
-        font = UIFont.systemFont(ofSize: 18, weight: .medium )
+        backgroundColor = .white
     }
-
+    
+    
+    func setColor(with color: UIColor) {
+        backgroundColor = color
+    }
+    
+    
 }

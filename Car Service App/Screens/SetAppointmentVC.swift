@@ -14,7 +14,6 @@ class SetAppointmentVC: CSALoadingVC {
     let carLabel = CSASecondTitleLabel()
     let phoneNumberTextFieldView = CSATextFieldView()
     let dateTextFieldView = CSATextFieldView()
-    
     let doneButton = CSAAuthButton(title: "Done")
     let cancelButton = CSATextButton(title: "Cancel", color: Colors.softBlue)
     
@@ -22,13 +21,12 @@ class SetAppointmentVC: CSALoadingVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureView()
         
+        configureView()
         configureTitleLabel()
         configureCarLabel()
         configurenPhoneTextFieldView()
         configureDateTextFieldView()
-        
         configureDoneButton()
         configureCancelButton()
     }
@@ -45,8 +43,10 @@ class SetAppointmentVC: CSALoadingVC {
         ])
     }
     
+    
     func configureCarLabel() {
         view.addSubview(carLabel)
+        
         guard let car = car else {return}
         carLabel.text = "\(car.plateNumber) - \(car.model) - \(car.currentKm) km"
         
@@ -59,9 +59,10 @@ class SetAppointmentVC: CSALoadingVC {
     
     func configurenPhoneTextFieldView() {
         view.addSubview(phoneNumberTextFieldView)
+        
         addTapGesture(view: phoneNumberTextFieldView)
         phoneNumberTextFieldView.set(textFieldType: .phone)
-        // phoneNumberTextFieldView.textField.delegate = self
+        phoneNumberTextFieldView.textField.delegate = self
         
         NSLayoutConstraint.activate([
             phoneNumberTextFieldView.topAnchor.constraint(equalTo: carLabel.bottomAnchor, constant: 20),
@@ -72,12 +73,11 @@ class SetAppointmentVC: CSALoadingVC {
     }
     
     
-    
     func configureDateTextFieldView() {
         view.addSubview(dateTextFieldView)
         addTapGesture(view: dateTextFieldView)
         dateTextFieldView.set(textFieldType: .appointment)
-        // dateTextFieldView.textField.delegate = self
+        dateTextFieldView.textField.delegate = self
         
         NSLayoutConstraint.activate([
             dateTextFieldView.topAnchor.constraint(equalTo: phoneNumberTextFieldView.bottomAnchor, constant: 25),
@@ -106,21 +106,28 @@ class SetAppointmentVC: CSALoadingVC {
         guard let date = dateTextFieldView.textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
         guard let car = car else { return }
         
-        let newAppointment = Appointment(uid: UUID(), car: car.uid.uuidString, carOwner: car.owner, phoneNumber: number, date: date)
+        phoneNumberTextFieldView.checkIsEmpty()
+        dateTextFieldView.checkIsEmpty()
         
-        showLoadingView()
-        FirestoreManager.createAppointment(appointment: newAppointment) { [weak self] result in
-            guard let self = self else { return }
-            self.dismissLoadingView()
-            switch result {
-            case .success(let string):
-                print(string)
-                self.navigationController?.popViewController(animated: true)
-            case .failure(let error):
-                print(error.localizedDescription)
+        if number != "" && date != "" {
+            
+            let newAppointment = Appointment(uid: UUID(), car: car.uid.uuidString, carOwner: car.owner, phoneNumber: number, date: date)
+            showLoadingView()
+            FirestoreManager.createAppointment(appointment: newAppointment) { [weak self] result in
+                guard let self = self else { return }
+                self.dismissLoadingView()
+                switch result {
+                case .success(let string):
+                    print(string)
+                    self.navigationController?.popViewController(animated: true)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
             }
         }
+        
     }
+    
     
     func configureCancelButton() {
         view.addSubview(cancelButton)
@@ -135,9 +142,11 @@ class SetAppointmentVC: CSALoadingVC {
         ])
     }
     
+    
     @objc func handleCancelButton() {
         navigationController?.popViewController(animated: true)
     }
+    
     
     func configureView() {
         navigationController?.setNavigationBarHidden(true, animated: true)
@@ -146,11 +155,13 @@ class SetAppointmentVC: CSALoadingVC {
         view.isUserInteractionEnabled = true
     }
     
+    
     func addTapGesture(view: CSATextFieldView) {
         view.isUserInteractionEnabled = true
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
         view.addGestureRecognizer(tap)
     }
+    
     
     @objc func handleTap(sender: UIGestureRecognizer) {
         if let view = sender.view as? CSATextFieldView{
@@ -160,5 +171,35 @@ class SetAppointmentVC: CSALoadingVC {
     
 }
 
-
+extension SetAppointmentVC: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == phoneNumberTextFieldView.textField {
+            textField.resignFirstResponder()
+            dateTextFieldView.textField.becomeFirstResponder()
+        } else if textField == dateTextFieldView.textField {
+            textField.resignFirstResponder()
+        }
+        return true
+    }
+    
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == phoneNumberTextFieldView.textField {
+            phoneNumberTextFieldView.checkIsEmpty()
+        } else if textField == dateTextFieldView.textField {
+            dateTextFieldView.checkIsEmpty()
+        }
+    }
+    
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if textField == phoneNumberTextFieldView.textField {
+            phoneNumberTextFieldView.setColor(with: .white)
+        } else if textField == dateTextFieldView.textField {
+            dateTextFieldView.setColor(with: .white)
+        }
+        return true
+    }
+    
+}
 

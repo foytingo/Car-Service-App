@@ -13,20 +13,24 @@ class CSASelectPropertiesView: UIView {
     let label = UILabel()
     let detailLabel = UILabel()
     let disclosureIndicator = UIImageView()
-    let lineView = UIView()
+    let lineView = CSALineView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         translatesAutoresizingMaskIntoConstraints = false
+        
         configureLabel()
         configureDetailLabel()
         configureDisclosureIndicator()
         configureLineView()
     }
     
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     
     convenience init(labelText: String, tag: Int) {
         self.init(frame: .zero)
@@ -35,11 +39,12 @@ class CSASelectPropertiesView: UIView {
     }
     
     
-    
     private func configureLabel() {
         addSubview(label)
+        
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .white
+        
         NSLayoutConstraint.activate([
             label.centerYAnchor.constraint(equalTo: centerYAnchor),
             label.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -47,11 +52,14 @@ class CSASelectPropertiesView: UIView {
         ])
     }
     
+    
     private func configureDetailLabel() {
         addSubview(detailLabel)
+        
         detailLabel.translatesAutoresizingMaskIntoConstraints = false
         detailLabel.textColor = Colors.softBlue
         detailLabel.text = "Select"
+        
         NSLayoutConstraint.activate([
             detailLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             detailLabel.trailingAnchor.constraint(equalTo: trailingAnchor ,constant: -30),
@@ -59,23 +67,24 @@ class CSASelectPropertiesView: UIView {
         ])
     }
     
+    
     private func configureDisclosureIndicator() {
         addSubview(disclosureIndicator)
+        
         disclosureIndicator.translatesAutoresizingMaskIntoConstraints = false
         disclosureIndicator.image = UIImage(systemName: "chevron.right")?.withRenderingMode(.alwaysTemplate)
         disclosureIndicator.tintColor = .white
+        
         NSLayoutConstraint.activate([
             disclosureIndicator.centerYAnchor.constraint(equalTo: centerYAnchor),
             disclosureIndicator.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
         ])
     }
     
+    
     private func configureLineView() {
         addSubview(lineView)
-        
-        lineView.translatesAutoresizingMaskIntoConstraints = false
-        lineView.backgroundColor = .white
-        
+
         NSLayoutConstraint.activate([
             lineView.topAnchor.constraint(equalTo: bottomAnchor),
             lineView.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -83,9 +92,6 @@ class CSASelectPropertiesView: UIView {
             lineView.heightAnchor.constraint(equalToConstant: 1),
         ])
     }
-    
-    func nonSet() {
-        lineView.backgroundColor = .systemRed
-    }
+
     
 }

@@ -17,6 +17,7 @@ class ForgotPasswordVC: CSALoadingVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         configureView()
         configureEmailTextFieldView()
         configureTitleLabel()
@@ -24,12 +25,14 @@ class ForgotPasswordVC: CSALoadingVC {
         configureLoginButton()
     }
     
+    
     func configureView() {
         navigationController?.setNavigationBarHidden(true, animated: true)
         view.backgroundColor = Colors.darkBlue
         view.isUserInteractionEnabled = true
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleViewTap)))
     }
+    
     
     func configureTitleLabel() {
         view.addSubview(titleLabel)
@@ -42,8 +45,10 @@ class ForgotPasswordVC: CSALoadingVC {
         ])
     }
     
+    
     func configureEmailTextFieldView() {
         view.addSubview(emailTextFieldView)
+        
         addTapGesture(view: emailTextFieldView)
         emailTextFieldView.set(textFieldType: .email)
         emailTextFieldView.textField.delegate = self
@@ -55,6 +60,7 @@ class ForgotPasswordVC: CSALoadingVC {
             emailTextFieldView.widthAnchor.constraint(equalToConstant: 325)
         ])
     }
+    
     
     func configureResetPasswordButtonButton() {
         view.addSubview(resetPasswordButton)
@@ -69,6 +75,7 @@ class ForgotPasswordVC: CSALoadingVC {
         ])
     }
     
+    
     func configureLoginButton() {
         view.addSubview(loginButton)
         
@@ -82,9 +89,11 @@ class ForgotPasswordVC: CSALoadingVC {
         ])
     }
     
+    
     @objc func showLogin(){
         navigationController?.popToRootViewController(animated: true)
     }
+    
     
     @objc func resetPassword(){
         view.endEditing(true)
@@ -107,20 +116,21 @@ class ForgotPasswordVC: CSALoadingVC {
                     self.presentAlertWithOk(title: "Error", message: error.localizedDescription)
                 }
             }
-            
         }
-        
     }
+    
     
     @objc func handleViewTap() {
         view.endEditing(true)
     }
+    
     
     func addTapGesture(view: CSATextFieldView) {
         view.isUserInteractionEnabled = true
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
         view.addGestureRecognizer(tap)
     }
+    
     
     @objc func handleTap(sender: UIGestureRecognizer) {
         if let view = sender.view as? CSATextFieldView{
@@ -129,14 +139,15 @@ class ForgotPasswordVC: CSALoadingVC {
     }
 }
 
+
 extension ForgotPasswordVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == emailTextFieldView.textField {
             textField.resignFirstResponder()
         }
-        
         return true
     }
+    
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == emailTextFieldView.textField {
@@ -144,10 +155,13 @@ extension ForgotPasswordVC: UITextFieldDelegate {
         }
     }
     
+    
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField == emailTextFieldView.textField {
-            emailTextFieldView.setNormalColor()
+            emailTextFieldView.setColor(with: .white)
         }
         return true
     }
+    
+    
 }

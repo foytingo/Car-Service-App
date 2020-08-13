@@ -15,15 +15,22 @@ class CSATextFieldTitleLabel: UILabel {
         configure()
     }
     
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     
     func configure() {
         translatesAutoresizingMaskIntoConstraints = false
         font = UIFont.systemFont(ofSize: 14, weight: .light)
         textAlignment = .left
         textColor = .white
+    }
+    
+    
+    func setColor(with color: UIColor) {
+        textColor = color
     }
     
 }

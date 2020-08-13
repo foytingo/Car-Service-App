@@ -9,6 +9,7 @@
 import Foundation
 
 struct User {
+    
     var uid: String?
     var name: String
     var email: String
@@ -16,12 +17,13 @@ struct User {
     var cars: [String] = []
     var appointments: [String] = []
     
+    
     init(name: String, email: String, password: String, uid: String? = nil) {
         self.name = name
         self.email = email
         self.password = password
-  
     }
+    
     
     init(uid: String, dictionary: [String:Any], password: String? = nil) {
         self.uid = uid
@@ -31,4 +33,6 @@ struct User {
         self.appointments = dictionary["appointments"] as? [String] ?? []
         self.password = password ?? ""
     }
+    
+    
 }

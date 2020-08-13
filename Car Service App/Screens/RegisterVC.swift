@@ -18,9 +18,9 @@ class RegisterVC: CSALoadingVC {
     let loginButton = CSATextButton(title: "Do you have a account? Login!", color: Colors.softBlue)
     
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         configureView()
         configurenNameTextFieldView()
         configureEmailTextFieldView()
@@ -28,8 +28,8 @@ class RegisterVC: CSALoadingVC {
         configureTitleLabel()
         configureRegisterButton()
         configureLoginButton()
-        
     }
+    
     
     func configureView() {
         view.backgroundColor = Colors.darkBlue
@@ -52,6 +52,7 @@ class RegisterVC: CSALoadingVC {
     
     func configurenNameTextFieldView() {
         view.addSubview(nameTextFieldView)
+        
         addTapGesture(view: nameTextFieldView)
         nameTextFieldView.set(textFieldType: .name)
         nameTextFieldView.textField.delegate = self
@@ -64,8 +65,10 @@ class RegisterVC: CSALoadingVC {
         ])
     }
     
+    
     func configureEmailTextFieldView() {
         view.addSubview(emailTextFieldView)
+        
         addTapGesture(view: emailTextFieldView)
         emailTextFieldView.set(textFieldType: .email)
         emailTextFieldView.textField.delegate = self
@@ -78,8 +81,10 @@ class RegisterVC: CSALoadingVC {
         ])
     }
     
+    
     func configurePasswordTextFieldView() {
         view.addSubview(passwordTextFieldView)
+        
         addTapGesture(view: passwordTextFieldView)
         passwordTextFieldView.set(textFieldType: .password)
         passwordTextFieldView.textField.delegate = self
@@ -148,11 +153,13 @@ class RegisterVC: CSALoadingVC {
         }
     }
     
+    
     func presentMainVC(with uid: String) {
         let mainVC = AddCarVC()
         mainVC.uid = uid
         self.navigationController?.pushViewController(mainVC, animated: true)
     }
+    
     
     @objc func showLogin(){
         navigationController?.popToRootViewController(animated: true)
@@ -192,6 +199,7 @@ extension RegisterVC: UITextFieldDelegate {
         return true
     }
     
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == nameTextFieldView.textField {
             nameTextFieldView.checkIsEmpty()
@@ -202,16 +210,16 @@ extension RegisterVC: UITextFieldDelegate {
         }
     }
     
+    
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField == nameTextFieldView.textField {
-            nameTextFieldView.setNormalColor()
+            nameTextFieldView.setColor(with: .white)
         } else if textField == emailTextFieldView.textField {
-            emailTextFieldView.setNormalColor()
+            emailTextFieldView.setColor(with: .white)
         } else if textField == passwordTextFieldView.textField {
-            passwordTextFieldView.setNormalColor()
+            passwordTextFieldView.setColor(with: .white)
         }
         return true
     }
  
-    
 }

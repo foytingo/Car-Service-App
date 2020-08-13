@@ -16,21 +16,20 @@ class LoginVC: CSALoadingVC  {
     let loginButton = CSAAuthButton(title: "Login")
     let registerButton = CSATextButton(title: "Don't have a account? Sign up!", color: Colors.softBlue)
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         configureView()
         configureLogoImageView()
         configureEmailTextFieldView()
         configurePasswordTextFieldView()
         configureLoginButton()
         configureRegisterButton()
-        
-        emailTextFieldView.textField.text = "muratbaykor@gmail.com"
-        passwordTextFieldView.textField.text = "123456"
-        
     }
     
-    func configureView() {
+    
+    private func configureView() {
         navigationController?.setNavigationBarHidden(true, animated: true)
         view.backgroundColor = Colors.darkBlue
         view.isUserInteractionEnabled = true
@@ -38,7 +37,7 @@ class LoginVC: CSALoadingVC  {
     }
     
     
-    func configureLogoImageView() {
+    private func configureLogoImageView() {
         view.addSubview(logoImageView)
         
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -53,7 +52,7 @@ class LoginVC: CSALoadingVC  {
     }
     
     
-    func configureEmailTextFieldView() {
+    private func configureEmailTextFieldView() {
         view.addSubview(emailTextFieldView)
         
         emailTextFieldView.set(textFieldType: .email)
@@ -69,7 +68,7 @@ class LoginVC: CSALoadingVC  {
     }
     
     
-    func configurePasswordTextFieldView() {
+    private func configurePasswordTextFieldView() {
         view.addSubview(passwordTextFieldView)
         
         passwordTextFieldView.set(textFieldType: .password, forgotPasswordOn: true)
@@ -86,7 +85,7 @@ class LoginVC: CSALoadingVC  {
     }
     
     
-    func configureLoginButton() {
+    private func configureLoginButton() {
         view.addSubview(loginButton)
         
         loginButton.addTarget(self, action: #selector(handleLoginButton), for: .touchUpInside)
@@ -99,7 +98,8 @@ class LoginVC: CSALoadingVC  {
         ])
     }
     
-    func configureRegisterButton() {
+    
+    private func configureRegisterButton() {
         view.addSubview(registerButton)
         
         registerButton.addTarget(self, action: #selector(showRegister), for: .touchUpInside)
@@ -127,8 +127,8 @@ class LoginVC: CSALoadingVC  {
                 guard let self = self else { return }
                 self.dismissLoadingView()
                 switch result {
-                case .success(let uid):
-                    self.presentMainVC(with: uid)
+                case .success(_):
+                    self.presentMyAccountVC()
                 case .failure(let error):
                     self.presentAlertWithOk(title: "Error", message: error.localizedDescription)
                 }
@@ -136,18 +136,20 @@ class LoginVC: CSALoadingVC  {
         }
     }
     
-    func presentMainVC(with uid: String) {
-        let mainVC = MyAccountVC()
-        //mainVC.uid = uid
-        self.navigationController?.pushViewController(mainVC, animated: true)
+    
+    private func presentMyAccountVC() {
+        let myAccountVC = MyAccountVC()
+        self.navigationController?.pushViewController(myAccountVC, animated: true)
     }
+    
     
     @objc func showRegister(){
         let registerVC = RegisterVC()
         navigationController?.pushViewController(registerVC, animated: true)
     }
     
-    func addTapGesture(view: CSATextFieldView) {
+    
+    private func addTapGesture(view: CSATextFieldView) {
         view.isUserInteractionEnabled = true
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
         view.addGestureRecognizer(tap)
@@ -160,12 +162,13 @@ class LoginVC: CSALoadingVC  {
         }
     }
     
+    
     @objc func handleViewTap() {
         view.endEditing(true)
-        
     }
     
 }
+
 
 extension LoginVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -178,6 +181,7 @@ extension LoginVC: UITextFieldDelegate {
         return true
     }
     
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == emailTextFieldView.textField {
             emailTextFieldView.checkIsEmpty()
@@ -186,17 +190,18 @@ extension LoginVC: UITextFieldDelegate {
         }
     }
     
+    
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField == emailTextFieldView.textField {
-            emailTextFieldView.setNormalColor()
+            emailTextFieldView.setColor(with: .white)
         } else if textField == passwordTextFieldView.textField {
-            passwordTextFieldView.setNormalColor()
+            passwordTextFieldView.setColor(with: .white)
         }
         return true
     }
     
+    
 }
-
 
 
 extension LoginVC: CSATextFieldViewDelegate {
@@ -205,8 +210,4 @@ extension LoginVC: CSATextFieldViewDelegate {
         forgotPasswordVC.emailTextFieldView.textField.text = emailTextFieldView.textField.text
         navigationController?.pushViewController(forgotPasswordVC, animated: true)
     }
-    
-    
-    
-    
 }

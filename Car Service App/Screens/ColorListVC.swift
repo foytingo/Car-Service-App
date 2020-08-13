@@ -13,12 +13,23 @@ protocol SelectColorDelegate: class {
 }
 
 class ColorListVC: UITableViewController {
-
+    
     weak var selectColorDelegate: SelectColorDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureView()
+        configureTableView()
+    }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    
+    private func configureView() {
         navigationController?.setNavigationBarHidden(false, animated: true)
         navigationController?.navigationBar.barTintColor = Colors.softBlue
         navigationController?.navigationBar.tintColor = Colors.darkBlue
@@ -27,21 +38,21 @@ class ColorListVC: UITableViewController {
         
         view.backgroundColor = Colors.darkBlue
         title = "Select Color"
+    }
+    
+    
+    private func configureTableView() {
         tableView.separatorColor = Colors.softBlue
         tableView.separatorInset = .init(top: 0, left: 10, bottom: 0, right: 10)
         tableView.tableFooterView = UIView()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "ColorCell")
     }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        navigationController?.setNavigationBarHidden(true, animated: true)
-    }
     
-    // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Arrays.colors.count
     }
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ColorCell", for: indexPath)
@@ -52,9 +63,10 @@ class ColorListVC: UITableViewController {
         return cell
     }
     
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectColorDelegate?.didSelectColor(selectedColor: Arrays.colors[indexPath.row])
         navigationController?.popViewController(animated: true)
-        
     }
+    
 }

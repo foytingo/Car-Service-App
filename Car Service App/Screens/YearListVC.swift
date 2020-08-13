@@ -19,6 +19,16 @@ class YearListVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureView()
+        configureTableView()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+
+    private func configureView() {
         navigationController?.setNavigationBarHidden(false, animated: true)
         navigationController?.navigationBar.barTintColor = Colors.softBlue
         navigationController?.navigationBar.tintColor = Colors.darkBlue
@@ -27,21 +37,21 @@ class YearListVC: UITableViewController {
         
         view.backgroundColor = Colors.darkBlue
         title = "Select Car Model Year"
+    }
+    
+    
+    private func configureTableView() {
         tableView.separatorColor = Colors.softBlue
         tableView.separatorInset = .init(top: 0, left: 10, bottom: 0, right: 10)
         tableView.tableFooterView = UIView()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "ModelYearCell")
     }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        navigationController?.setNavigationBarHidden(true, animated: true)
-    }
     
-    // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Arrays.modelYears.count
     }
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ModelYearCell", for: indexPath)
@@ -52,9 +62,10 @@ class YearListVC: UITableViewController {
         return cell
     }
     
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectYearDelegate?.didSelectYear(selectedYear: Arrays.modelYears[indexPath.row])
         navigationController?.popViewController(animated: true)
-        
     }
 }
+
