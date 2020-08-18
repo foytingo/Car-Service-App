@@ -37,6 +37,9 @@ Manager-side iOS application that you can see and manage your customers, their c
 - [Registration Process](https://i.imgur.com/G2pLqNw.mp4 "Registration Process")
 - [Set Appointment Process](https://i.imgur.com/JALaAjp.mp4 "Set Appointment Process")
 
+### To-do List
+- Set actions for my account settings action sheet. (Current action name is "other".)
+- Change appointment date stored format from string to timestamp.
 
 ### License
 
