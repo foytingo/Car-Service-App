@@ -3,7 +3,7 @@
 
 Two iOS apps for client and manager;
 Client-side iOS application that your customer can set an appointment for their car.
-Manager-side iOS application that you can see and manage your customers, their cars, and appointments.
+Manager-side iOS (iPad) application that you can see and manage your customers, their cars, and appointments.
 
 #### Client App [Github](https://github.com/foytingo/Car-Service-App "Github")
 - Register with an email address.
