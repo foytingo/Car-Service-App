@@ -10,7 +10,7 @@ Manager-side iOS (iPad) application that you can see and manage your customers, 
 - Add more than one car to the account.
 - Set an appointment for the selected date.
 
-#### Manager App [Github](https://github.com/foytingo/Car-Service-Manager-App "Github")
+#### Manager App [Github](https://github.com/foytingo/Car-Sevice-Manager-App "Github")
 - Three tabs: Users, Cars, Appointments
 - Users tab is a list of registered users.
 - Cars tab is a list of registered user's cars.
